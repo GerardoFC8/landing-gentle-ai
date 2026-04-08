@@ -1,4 +1,4 @@
-import '@xterm/xterm/css/xterm.css'
+// xterm CSS is imported dynamically inside init() — not at top level
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { useReducedMotion } from 'motion/react'
 
@@ -317,10 +317,13 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
   // Keep currentScreen ref in sync with state (written during render — safe, no side-effects)
   currentScreenRef.current = currentScreen
 
-  // Animation tracking
+  // Animation tracking — separate refs for dwell timer and transition timer
   const animationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   // Store scheduler fn in ref so recursive call always gets latest version (advanced-event-handler-refs)
   const scheduleNextScreenRef = useRef<() => void>(() => {})
+  // Store drawScreen in ref so init effect always calls latest closure without re-running
+  const drawScreenRef = useRef<(screenIndex: number) => Promise<void>>(async () => {})
 
   const ariaLabel =
     locale === 'es'
@@ -354,15 +357,22 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
     drawingRef.current = false
   }, [prefersReducedMotion])
 
+  // Keep drawScreenRef in sync so the init effect always calls the latest closure
+  drawScreenRef.current = drawScreen
+
   /* ── Navigate to a specific screen ── */
   const goToScreen = useCallback(async (index: number, resumeAutoPlay = false) => {
     if (!isReadyRef.current || isDisposedRef.current) return
     const clamped = Math.max(0, Math.min(SCREENS.length - 1, index))
 
-    // Cancel any pending auto-advance timer
+    // Cancel any pending auto-advance and transition timers
     if (animationTimeoutRef.current) {
       clearTimeout(animationTimeoutRef.current)
       animationTimeoutRef.current = null
+    }
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current)
+      transitionTimeoutRef.current = null
     }
 
     setCurrentScreen(clamped)
@@ -400,7 +410,7 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
         currentScreenRef.current = next
 
         await new Promise<void>((resolve) => {
-          animationTimeoutRef.current = setTimeout(resolve, TRANSITION_PAUSE)
+          transitionTimeoutRef.current = setTimeout(resolve, TRANSITION_PAUSE)
         })
 
         if (!isDisposedRef.current) {
@@ -420,6 +430,7 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
     let ro: ResizeObserver | null = null
 
     async function init() {
+      await import('@xterm/xterm/css/xterm.css')
       const { Terminal: XTerm } = await import('@xterm/xterm')
       const { FitAddon } = await import('@xterm/addon-fit')
 
@@ -458,8 +469,8 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
       isReadyRef.current = true
 
       // Draw first screen then start auto-play loop
-      await drawScreen(0)
-      scheduleNextScreen()
+      await drawScreenRef.current(0)
+      scheduleNextScreenRef.current()
     }
 
     init().catch(console.error)
@@ -468,19 +479,20 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
       isDisposedRef.current = true
       isReadyRef.current = false
       if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current)
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
       if (ro) ro.disconnect()
       if (termRef.current) {
         termRef.current.dispose()
         termRef.current = null
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale])
 
   /* ── Button handlers ── */
   const handleBack = useCallback(() => {
     autoPlayRef.current = false
     if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current)
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
     const prev = (currentScreenRef.current - 1 + SCREENS.length) % SCREENS.length
     goToScreen(prev)
   }, [goToScreen])
@@ -488,6 +500,7 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
   const handleForward = useCallback(() => {
     autoPlayRef.current = false
     if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current)
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
     const next = (currentScreenRef.current + 1) % SCREENS.length
     goToScreen(next)
   }, [goToScreen])

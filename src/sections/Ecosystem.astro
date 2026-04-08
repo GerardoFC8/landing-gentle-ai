@@ -106,7 +106,7 @@ const { i18n } = Astro.props
       if (fallback?.classList.contains('agent-logo-fallback')) {
         fallback.classList.remove('hidden');
       }
-    });
+    }, { once: true });
   });
 </script>
 

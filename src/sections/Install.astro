@@ -68,7 +68,7 @@ const { locale, i18n } = Astro.props
     <div class="flex flex-col gap-3">
       <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
         <span aria-hidden="true"><Globe size={18} /></span>
-        {locale === 'en' ? 'Any platform (Go 1.24+)' : 'Cualquier plataforma (Go 1.24+)'}
+        {i18n.install.anyPlatform}
       </h3>
       <CodeBlock language="bash" code="go install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest" />
     </div>
@@ -78,7 +78,7 @@ const { locale, i18n } = Astro.props
   <!-- Post-install steps -->
   <div class="max-w-4xl mx-auto mt-10">
     <h3 class="font-heading font-semibold text-text-primary text-base mb-4">
-      {locale === 'en' ? 'Next steps' : 'Próximos pasos'}
+      {i18n.install.nextSteps}
     </h3>
     <ol class="flex flex-col gap-3">
       {i18n.install.postInstall.map((step, index) => (

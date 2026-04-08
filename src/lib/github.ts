@@ -20,7 +20,6 @@ const FALLBACK_RELEASE = {
   url: 'https://github.com/Gentleman-Programming/gentle-ai/releases',
 } as const;
 
-const FALLBACK_CONTRIBUTORS = 24;
 
 export interface RepoStats {
   stars: number;
@@ -95,41 +94,6 @@ export async function getLatestRelease(): Promise<LatestRelease> {
   }
 }
 
-/**
- * Uses the Link header pagination trick to get the total count without
- * fetching all release pages. Requests page 1 with per_page=1, reads
- * the last page number from the Link header's `rel="last"` entry.
- */
-export async function getReleaseCount(): Promise<number> {
-  try {
-    const res = await fetch(
-      `${BASE_URL}/repos/${REPO_OWNER}/${REPO_NAME}/releases?per_page=1&page=1`,
-      { headers: makeHeaders() }
-    );
-
-    if (!res.ok) {
-      throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
-    }
-
-    const linkHeader = res.headers.get('link');
-    if (!linkHeader) {
-      // If there's no Link header the repo has 0 or 1 releases
-      const data = await res.json();
-      return Array.isArray(data) ? data.length : 0;
-    }
-
-    // Parse: <...?page=N>; rel="last"
-    const match = linkHeader.match(/[?&]page=(\d+)>;\s*rel="last"/);
-    if (match && match[1]) {
-      return parseInt(match[1], 10);
-    }
-
-    return 1;
-  } catch (err) {
-    console.warn('[github.ts] getReleaseCount failed, using fallback:', err);
-    return 0;
-  }
-}
 
 export interface Contributor {
   login: string;
@@ -165,12 +129,6 @@ export async function getContributors(max: number = 20): Promise<Contributor[]> 
     }));
   } catch (err) {
     console.warn('[github.ts] getContributors failed, using fallback:', err);
-    // Return a synthetic list with the known fallback count
-    return Array.from({ length: Math.min(max, FALLBACK_CONTRIBUTORS) }, (_, i) => ({
-      login: `contributor-${i + 1}`,
-      avatarUrl: `https://avatars.githubusercontent.com/u/${1000 + i}?v=4`,
-      profileUrl: 'https://github.com',
-      contributions: 1,
-    }));
+    return [];
   }
 }

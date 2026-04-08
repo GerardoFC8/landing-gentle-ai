@@ -8,7 +8,6 @@ interface Props {
 
 const { locale, i18n } = Astro.props
 
-const year = new Date().getFullYear()
 ---
 
 <footer class="bg-bg-surface border-t border-border-default">
@@ -136,11 +135,7 @@ const year = new Date().getFullYear()
     <!-- Bottom bar -->
     <div class="pt-6 border-t border-border-default flex flex-col sm:flex-row items-center justify-between gap-3">
       <p class="text-sm text-text-muted">
-        © {year} Gentleman Programming.
-        <span class="inline-flex items-center gap-1 ml-1">
-          <span class="px-1.5 py-0.5 rounded text-xs font-mono bg-bg-elevated border border-border-default text-text-muted">MIT</span>
-          License.
-        </span>
+        {i18n.footer.copyright}
       </p>
       <p class="text-xs text-text-muted">
         {locale === 'en' ? 'Made with' : 'Hecho con'}

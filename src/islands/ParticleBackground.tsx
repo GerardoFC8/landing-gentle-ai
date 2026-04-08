@@ -73,10 +73,9 @@ export default function ParticleBackground({ color: colorProp }: ParticleBackgro
 
     function initParticles() {
       const count = getParticleCount();
-      // Use logical (CSS) dimensions — particle coords are in logical space;
-      // the ctx.scale(dpr,dpr) call in resizeCanvas handles the mapping.
+      // Use canvas CSS dimensions — avoids scrollbar width issues on Windows/Linux
       particlesRef.current = Array.from({ length: count }, () =>
-        createParticle(window.innerWidth, window.innerHeight)
+        createParticle(canvas!.clientWidth || window.innerWidth, canvas!.clientHeight || window.innerHeight)
       );
     }
 
@@ -155,7 +154,7 @@ export default function ParticleBackground({ color: colorProp }: ParticleBackgro
             // Auto-disable: consistently below threshold
             stopped = true;
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
             return;
           }
         } else {
@@ -163,9 +162,9 @@ export default function ParticleBackground({ color: colorProp }: ParticleBackgro
         }
       }
 
-      // Use logical dimensions — ctx is scaled by DPR via resizeCanvas
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      // Use canvas CSS dimensions — matches initParticles, avoids scrollbar offset
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import type { ReactNode, MouseEvent } from 'react';
 import { useReducedMotion } from 'motion/react';
 
@@ -61,7 +61,10 @@ export default function Card3D({ children, class: className }: Card3DProps) {
   );
 
   const handleMouseEnter = () => {
-    if (!prefersReducedMotion) setIsHovered(true);
+    if (!prefersReducedMotion) {
+      setIsHovered(true);
+      if (cardRef.current) cardRef.current.style.willChange = 'transform';
+    }
   };
 
   const handleMouseLeave = () => {
@@ -70,8 +73,19 @@ export default function Card3D({ children, class: className }: Card3DProps) {
       // Spring-like reset: animate back using CSS transition
       setRot({ x: 0, y: 0 });
       setGlare({ x: 50, y: 50 });
+      if (cardRef.current) cardRef.current.style.willChange = 'auto';
     }
   };
+
+  // Cancel any pending rAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
 
   // Reduced motion — render as a plain static div
   if (prefersReducedMotion) {
@@ -96,7 +110,6 @@ export default function Card3D({ children, class: className }: Card3DProps) {
           transition: isHovered
             ? 'transform 0.1s ease-out'
             : 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)', // spring-like on leave
-          willChange: 'transform',
           transformStyle: 'preserve-3d',
         }}
         className="relative"

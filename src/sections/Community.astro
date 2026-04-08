@@ -50,7 +50,7 @@ const displayContributors = contributors.slice(0, 12)
   {displayContributors.length > 0 && (
     <div class="mb-12 text-center">
       <h3 class="font-heading font-semibold text-text-primary text-xl mb-6">
-        {locale === 'en' ? 'Contributors' : 'Contribuidores'}
+        {i18n.community.contributorsLabel}
       </h3>
       <div class="flex flex-wrap justify-center gap-3" data-stagger>
         {displayContributors.map((contributor) => (

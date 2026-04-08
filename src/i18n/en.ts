@@ -258,6 +258,8 @@ export const en = {
 
   install: {
     headline: 'Install in seconds.',
+    anyPlatform: 'Any platform (Go 1.24+)',
+    nextSteps: 'Next steps',
     postInstall: [
       'Run `gentle-ai --version` to verify the installation',
       'Run `gentle-ai --preset full-gentleman` to apply the full preset',
@@ -270,6 +272,7 @@ export const en = {
     intro:
       'Gentle AI is open source and community-driven. Join thousands of developers shipping faster with AI.',
     discord: 'Join our Discord',
+    contributorsLabel: 'Contributors',
     labels: {
       stars: 'GitHub Stars',
       forks: 'Forks',
@@ -420,10 +423,10 @@ export const en = {
         label: 'Sections',
         items: [
           { label: 'How It Works', url: '#how-it-works' },
-          { label: 'Agents', url: '#agents' },
-          { label: 'Components', url: '#components' },
+          { label: 'Ecosystem', url: '#ecosystem' },
           { label: 'Install', url: '#install' },
           { label: 'Demo', url: '#demo' },
+          { label: 'Community', url: '#community' },
         ],
       },
       community: {

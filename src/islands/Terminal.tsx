@@ -1,4 +1,3 @@
-import '@xterm/xterm/css/xterm.css';
 import { useRef, useEffect, useReducer } from 'react';
 import { useReducedMotion } from 'motion/react';
 
@@ -59,7 +58,7 @@ export default function Terminal({ commands, locale }: TerminalProps) {
   // We store cleanup refs imperatively — not in state (avoids re-renders)
   const terminalRef = useRef<import('@xterm/xterm').Terminal | null>(null);
   const fitAddonRef = useRef<import('@xterm/addon-fit').FitAddon | null>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const isDisposedRef = useRef(false);
 
@@ -132,36 +131,18 @@ export default function Terminal({ commands, locale }: TerminalProps) {
         return;
       }
 
-      // Animated typing — one char at a time with pauses between commands
+      // Animated typing — recursive setTimeout avoids setInterval drift
       let cmdIndex = 0;
       let charIndex = 0;
-      let isPausing = false;
-      let pauseEndTime = 0;
 
       // Write prompt prefix for first command
       term.write('\x1b[32m❯\x1b[0m ');
 
-      const tick = setInterval(() => {
-        if (isDisposedRef.current) {
-          clearInterval(tick);
-          return;
-        }
-
-        const now = Date.now();
-
-        // In inter-command pause
-        if (isPausing) {
-          if (now >= pauseEndTime) {
-            isPausing = false;
-            // Start next command — write prompt
-            term.write('\x1b[32m❯\x1b[0m ');
-          }
-          return;
-        }
+      function typeNextChar() {
+        if (isDisposedRef.current) return;
 
         const currentCmd = commands[cmdIndex];
         if (currentCmd === undefined) {
-          clearInterval(tick);
           dispatch({ type: 'COMPLETE' });
           return;
         }
@@ -169,33 +150,37 @@ export default function Terminal({ commands, locale }: TerminalProps) {
         if (charIndex < currentCmd.length) {
           term.write(currentCmd[charIndex]!);
           charIndex++;
+          timeoutRef.current = setTimeout(typeNextChar, TYPING_SPEED_MS);
         } else {
-          // Finished current command — newline + pause
+          // Finished current command — newline + pause before next
           term.writeln('');
           cmdIndex++;
           charIndex = 0;
 
           if (cmdIndex >= commands.length) {
-            clearInterval(tick);
             dispatch({ type: 'COMPLETE' });
           } else {
-            // Pause between commands
-            isPausing = true;
-            pauseEndTime = Date.now() + BETWEEN_COMMAND_PAUSE_MS;
+            // Pause between commands, then write prompt and continue
+            timeoutRef.current = setTimeout(() => {
+              if (!isDisposedRef.current) {
+                term.write('\x1b[32m❯\x1b[0m ');
+                typeNextChar();
+              }
+            }, BETWEEN_COMMAND_PAUSE_MS);
           }
         }
-      }, TYPING_SPEED_MS);
+      }
 
-      intervalRef.current = tick;
+      timeoutRef.current = setTimeout(typeNextChar, TYPING_SPEED_MS);
     }
 
     initTerminal().catch(console.error);
 
     return () => {
       isDisposedRef.current = true;
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
       if (resizeObserverRef.current) {
         resizeObserverRef.current.disconnect();
@@ -231,10 +216,10 @@ export default function Terminal({ commands, locale }: TerminalProps) {
           <span className="text-[#E91E8C]">❯</span>
           {/* Blinking CSS cursor */}
           <span
+            aria-hidden="true"
             className="inline-block w-2 h-4 bg-[#E91E8C] align-middle"
             style={{ animation: 'blink 1s step-end infinite' }}
           />
-          <style>{`@keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }`}</style>
         </div>
       )}
 

@@ -50,8 +50,18 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
    THEME TRANSITION — smooth dark ↔ light switch
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  :root,
-  :root * {
+  body,
+  nav,
+  header,
+  footer,
+  section,
+  main,
+  aside,
+  article,
+  .card,
+  [class*="bg-"],
+  [class*="border-"],
+  [class*="text-"] {
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   }
 }
@@ -117,6 +127,14 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
 }
 
 /* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================================
    BASE RESET & TYPOGRAPHY
    Placed inside @layer base so Tailwind utility classes
    (which live in @layer utilities) can override these defaults.
@@ -126,8 +144,6 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
   *::before,
   *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
   }
 
   html {
