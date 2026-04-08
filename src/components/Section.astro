@@ -1,0 +1,19 @@
+---
+interface Props {
+  id: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+
+const classes = [
+  'py-[var(--spacing-section-sm)] md:py-[var(--spacing-section)]',
+  className ?? '',
+].filter(Boolean).join(' ');
+---
+
+<section id={id} class={classes}>
+  <div class="max-w-7xl mx-auto px-6">
+    <slot />
+  </div>
+</section>

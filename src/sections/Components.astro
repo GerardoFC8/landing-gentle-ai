@@ -1,0 +1,68 @@
+---
+import Section from '../components/Section.astro'
+import Card3D from '../islands/Card3D.tsx'
+import Badge from '../components/ui/Badge.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import { components } from '../data/components'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+
+const categoryColor: Record<string, 'primary' | 'secondary' | 'neutral'> = {
+  core: 'primary',
+  enhancement: 'secondary',
+  config: 'neutral',
+}
+---
+
+<Section id="components" class="relative overflow-hidden">
+  <GlowBlob color="secondary" size="md" class="-bottom-10 left-0 opacity-20" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.components.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.components.intro}
+    </p>
+  </div>
+
+  <!-- Components grid — each wrapped in Card3D island -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-stagger>
+    {components.map((component) => (
+      <Card3D client:visible>
+        <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-5 flex flex-col gap-4 h-full min-h-48">
+
+          <!-- Icon + Code badge -->
+          <div class="flex items-start justify-between gap-2">
+            <div class="text-3xl leading-none" aria-hidden="true">
+              {component.icon}
+            </div>
+            <Badge color={categoryColor[component.category] ?? 'neutral'} class="shrink-0 text-[10px]">
+              {component.codeName}
+            </Badge>
+          </div>
+
+          <!-- Component info -->
+          <div class="flex flex-col gap-1.5 flex-1">
+            <h3 class="font-heading font-semibold text-text-primary text-base leading-snug">
+              {component.name}
+            </h3>
+            <p class="text-text-muted text-xs leading-relaxed">
+              {component.description[locale as 'en' | 'es']}
+            </p>
+          </div>
+        </div>
+      </Card3D>
+    ))}
+  </div>
+</Section>

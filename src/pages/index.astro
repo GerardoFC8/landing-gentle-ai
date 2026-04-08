@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+import Hero from '../sections/Hero.astro'
+import Problem from '../sections/Problem.astro'
+import Solution from '../sections/Solution.astro'
+import HowItWorks from '../sections/HowItWorks.astro'
+import SDDPipeline from '../sections/SDDPipeline.astro'
+import Agents from '../sections/Agents.astro'
+import Components from '../sections/Components.astro'
+import Presets from '../sections/Presets.astro'
+import Install from '../sections/Install.astro'
+import Community from '../sections/Community.astro'
+import FinalCTA from '../sections/FinalCTA.astro'
+import { t } from '../i18n/utils'
+import { getRepoStats, getLatestRelease, getContributors } from '../lib/github'
+
+const locale = 'en'
+const i18n = t(locale)
+
+const [stats, release, contributors] = await Promise.all([
+  getRepoStats(),
+  getLatestRelease(),
+  getContributors(12),
+])
+---
+
+<BaseLayout
+  locale={locale}
+  title={i18n.meta.title}
+  description={i18n.meta.description}
+>
+  <!-- JSON-LD structured data -->
+  <Fragment slot="json-ld">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Gentle AI",
+      "description": i18n.meta.description,
+      "url": "https://github.com/Gentleman-Programming/gentle-ai",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "macOS, Linux, Windows",
+      "softwareVersion": release.version,
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "Alan Buscaglia"
+      }
+    })} />
+  </Fragment>
+
+  <!-- Navigation -->
+  <Fragment slot="nav">
+    <Nav locale={locale} i18n={i18n} />
+  </Fragment>
+
+  <!-- Page sections -->
+  <Hero locale={locale} i18n={i18n} stats={stats} release={release} />
+  <Problem locale={locale} i18n={i18n} />
+  <Solution locale={locale} i18n={i18n} />
+  <HowItWorks locale={locale} i18n={i18n} />
+  <SDDPipeline locale={locale} i18n={i18n} />
+  <Agents locale={locale} i18n={i18n} />
+  <Components locale={locale} i18n={i18n} />
+  <Install locale={locale} i18n={i18n} />
+  <Presets locale={locale} i18n={i18n} />
+  <Community locale={locale} i18n={i18n} stats={stats} release={release} contributors={contributors} />
+  <FinalCTA locale={locale} i18n={i18n} />
+
+  <!-- Footer -->
+  <Fragment slot="footer">
+    <Footer locale={locale} i18n={i18n} />
+  </Fragment>
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  disabled?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  disabled = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const sizeClasses: Record<string, string> = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg',
+};
+
+const variantClasses: Record<string, string> = {
+  primary:
+    'bg-accent-primary text-bg-base font-semibold hover:opacity-90 active:scale-[0.98]',
+  secondary:
+    'border border-accent-primary text-accent-primary bg-transparent hover:bg-accent-primary/10 active:scale-[0.98]',
+  ghost:
+    'text-text-muted hover:text-text-primary bg-transparent',
+};
+
+const baseClasses = [
+  'inline-flex items-center justify-center gap-2',
+  'rounded-[var(--radius-button)]',
+  'font-body font-medium',
+  'transition-all duration-150',
+  'cursor-pointer select-none',
+  disabled ? 'opacity-50 pointer-events-none' : '',
+  variantClasses[variant],
+  sizeClasses[size],
+  className ?? '',
+].filter(Boolean).join(' ');
+
+---
+
+{href ? (
+  <a href={href} class={baseClasses} aria-disabled={disabled || undefined} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button class={baseClasses} disabled={disabled} {...rest}>
+    <slot />
+  </button>
+)}

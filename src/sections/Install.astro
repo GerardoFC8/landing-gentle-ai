@@ -1,0 +1,94 @@
+---
+import Section from '../components/Section.astro'
+import CodeBlock from '../components/CodeBlock.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+---
+
+<Section id="install" class="relative overflow-hidden">
+  <GlowBlob color="primary" size="lg" class="top-1/2 -translate-y-1/2 -left-20 opacity-20" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.install.headline}
+    </h2>
+  </div>
+
+  <div class="max-w-4xl mx-auto flex flex-col gap-8" data-stagger>
+
+    <!-- Row: macOS / Linux -->
+    <div class="flex flex-col gap-3">
+      <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
+        <span aria-hidden="true">🍎🐧</span> macOS / Linux
+      </h3>
+      <div class="flex flex-col gap-3">
+        <div>
+          <span class="text-xs font-mono text-text-muted/60 uppercase tracking-wider mb-1.5 block">Homebrew</span>
+          <CodeBlock language="bash" code={"brew tap Gentleman-Programming/homebrew-tap\nbrew install gentle-ai"} />
+        </div>
+        <div>
+          <span class="text-xs font-mono text-text-muted/60 uppercase tracking-wider mb-1.5 block">curl</span>
+          <CodeBlock language="bash" code="curl -fsSL https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.sh | bash" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Row: Windows -->
+    <div class="flex flex-col gap-3">
+      <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
+        <span aria-hidden="true">🪟</span> Windows
+      </h3>
+      <div class="flex flex-col gap-3">
+        <div>
+          <span class="text-xs font-mono text-text-muted/60 uppercase tracking-wider mb-1.5 block">Scoop</span>
+          <CodeBlock language="bash" code={"scoop bucket add gentleman https://github.com/Gentleman-Programming/scoop-bucket\nscoop install gentle-ai"} />
+        </div>
+        <div>
+          <span class="text-xs font-mono text-text-muted/60 uppercase tracking-wider mb-1.5 block">PowerShell</span>
+          <CodeBlock language="powershell" code="irm https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | iex" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Row: Any platform -->
+    <div class="flex flex-col gap-3">
+      <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
+        <span aria-hidden="true">🌐</span>
+        {locale === 'en' ? 'Any platform (Go 1.24+)' : 'Cualquier plataforma (Go 1.24+)'}
+      </h3>
+      <CodeBlock language="bash" code="go install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest" />
+    </div>
+
+  </div>
+
+  <!-- Post-install steps -->
+  <div class="max-w-4xl mx-auto mt-10">
+    <h3 class="font-heading font-semibold text-text-primary text-base mb-4">
+      {locale === 'en' ? 'Next steps' : 'Próximos pasos'}
+    </h3>
+    <ol class="flex flex-col gap-3">
+      {i18n.install.postInstall.map((step, index) => (
+        <li class="flex items-start gap-3">
+          <span
+            class="shrink-0 w-6 h-6 rounded-full bg-accent-primary/15 border border-accent-primary/30 flex items-center justify-center text-xs font-mono font-semibold text-accent-primary"
+            aria-hidden="true"
+          >
+            {index + 1}
+          </span>
+          <span class="text-sm text-text-muted leading-relaxed pt-0.5">{step}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>

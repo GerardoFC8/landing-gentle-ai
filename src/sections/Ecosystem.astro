@@ -1,0 +1,72 @@
+---
+import Section from '../components/Section.astro'
+import Card from '../components/ui/Card.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+
+const projectIcons = ['⚙️', '🤖', '🎓', '📺']
+---
+
+<Section id="ecosystem" class="relative overflow-hidden">
+  <GlowBlob color="primary" size="md" class="bottom-0 right-0 opacity-15" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.ecosystem.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.ecosystem.intro}
+    </p>
+  </div>
+
+  <!-- Ecosystem project cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-stagger>
+    {i18n.ecosystem.projects.map((project, index) => (
+      <a
+        href={project.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group block no-underline"
+        aria-label={project.name}
+      >
+        <Card class="p-5 flex flex-col gap-4 h-full hover:border-accent-primary/40 transition-all duration-300 group-hover:-translate-y-0.5">
+          <!-- Icon -->
+          <div class="text-3xl leading-none" aria-hidden="true">
+            {projectIcons[index]}
+          </div>
+
+          <!-- Content -->
+          <div class="flex flex-col gap-1.5 flex-1">
+            <h3 class="font-heading font-semibold text-text-primary text-base leading-snug group-hover:text-accent-primary transition-colors duration-150">
+              {project.name}
+            </h3>
+            <p class="text-text-muted text-xs leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          <!-- Link hint -->
+          <div class="flex items-center gap-1.5 text-xs text-accent-primary/50 group-hover:text-accent-primary transition-colors duration-150">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            {locale === 'en' ? 'Visit project' : 'Ver proyecto'}
+          </div>
+        </Card>
+      </a>
+    ))}
+  </div>
+</Section>

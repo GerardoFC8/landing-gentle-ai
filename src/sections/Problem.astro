@@ -1,0 +1,68 @@
+---
+import Section from '../components/Section.astro'
+import Card from '../components/ui/Card.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { i18n } = Astro.props
+
+const icons = ['😩', '🤯', '💀']
+---
+
+<Section id="problem" class="relative overflow-hidden">
+  <!-- Decorative blob -->
+  <GlowBlob color="tertiary" size="md" class="-top-10 right-0 opacity-20" />
+
+  <!-- Header -->
+  <div class="text-center mb-16 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.problem.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.problem.intro}
+    </p>
+  </div>
+
+  <!-- Pain point cards -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-6"
+    data-stagger
+  >
+    {i18n.problem.points.map((point, index) => (
+      <Card class="p-6 flex flex-col gap-4 hover:border-accent-tertiary/40 transition-colors duration-300">
+        <!-- Icon -->
+        <div class="text-4xl leading-none" aria-hidden="true">
+          {icons[index]}
+        </div>
+
+        <!-- Number accent -->
+        <div class="text-xs font-mono text-accent-tertiary opacity-60 font-semibold tracking-wider">
+          {String(index + 1).padStart(2, '0')}
+        </div>
+
+        <!-- Content -->
+        <div>
+          <h3 class="font-heading font-semibold text-text-primary text-lg mb-2 leading-snug">
+            {point.title}
+          </h3>
+          <p class="text-text-muted text-sm leading-relaxed">
+            {point.description}
+          </p>
+        </div>
+
+        <!-- Bottom accent line -->
+        <div class="mt-auto pt-4 border-t border-border-default">
+          <div class="h-0.5 w-8 bg-accent-tertiary/40 rounded-full" />
+        </div>
+      </Card>
+    ))}
+  </div>
+</Section>

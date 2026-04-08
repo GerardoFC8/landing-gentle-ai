@@ -1,0 +1,36 @@
+---
+interface Props {
+  color?: 'primary' | 'tertiary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { color = 'primary', size = 'md', class: className } = Astro.props;
+
+const sizeMap: Record<string, string> = {
+  sm: '200px',
+  md: '400px',
+  lg: '600px',
+};
+
+const colorMap: Record<string, string> = {
+  primary: 'var(--accent-primary)',
+  tertiary: 'var(--accent-tertiary)',
+  secondary: 'var(--accent-secondary)',
+};
+
+const dimension = sizeMap[size];
+const blobColor = colorMap[color];
+
+const classes = [
+  'glow-blob',
+  'absolute pointer-events-none',
+  className ?? '',
+].filter(Boolean).join(' ');
+---
+
+<div
+  class={classes}
+  aria-hidden="true"
+  style={`width: ${dimension}; height: ${dimension}; background: radial-gradient(circle, ${blobColor}22 0%, transparent 70%);`}
+/>

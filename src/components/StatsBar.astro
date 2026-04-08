@@ -1,0 +1,59 @@
+---
+import StatsCounter from '../islands/StatsCounter.tsx'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  stats: { stars: number; forks: number; openIssues: number; watchers: number }
+  release: { version: string; publishedAt: string; url: string }
+  contributors: number
+  i18n: I18nStrings
+  locale?: Locale
+}
+
+const { stats, release, contributors, i18n, locale = 'en' } = Astro.props
+const numberLocale = locale === 'es' ? 'es-AR' : 'en-US'
+---
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border-default rounded-xl overflow-hidden border border-border-default">
+  <!-- Stars -->
+  <div class="bg-bg-surface px-6 py-6 flex flex-col items-center gap-2 text-center">
+    <StatsCounter
+      client:visible
+      value={stats.stars}
+      label={i18n.community.labels.stars}
+      suffix="+"
+      locale={numberLocale}
+    />
+  </div>
+
+  <!-- Forks -->
+  <div class="bg-bg-surface px-6 py-6 flex flex-col items-center gap-2 text-center">
+    <StatsCounter
+      client:visible
+      value={stats.forks}
+      label={i18n.community.labels.forks}
+      suffix="+"
+      locale={numberLocale}
+    />
+  </div>
+
+  <!-- Contributors -->
+  <div class="bg-bg-surface px-6 py-6 flex flex-col items-center gap-2 text-center">
+    <StatsCounter
+      client:visible
+      value={contributors}
+      label={i18n.community.labels.contributors}
+      locale={numberLocale}
+    />
+  </div>
+
+  <!-- Version — display as text, not counter -->
+  <div class="bg-bg-surface px-6 py-6 flex flex-col items-center gap-2 text-center">
+    <div class="text-3xl font-heading font-bold text-accent-primary leading-none">
+      {release.version}
+    </div>
+    <div class="text-xs text-text-muted font-body uppercase tracking-wider">
+      {i18n.community.labels.version}
+    </div>
+  </div>
+</div>

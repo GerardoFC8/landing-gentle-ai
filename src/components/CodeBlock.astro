@@ -1,0 +1,75 @@
+---
+interface Props {
+  language: string;
+  code: string;
+  class?: string;
+}
+
+const { language, code, class: className } = Astro.props;
+
+// Module-level counter — guarantees uniqueness across all instances rendered in a build
+const _counter = (globalThis as Record<string, unknown>);
+if (typeof _counter.__codeblock_counter !== 'number') {
+  _counter.__codeblock_counter = 0;
+}
+const blockId = `codeblock-${++(_counter.__codeblock_counter as number)}`;
+
+const classes = [
+  'relative group',
+  'bg-bg-elevated border border-border-default',
+  'rounded-lg overflow-hidden',
+  className ?? '',
+].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  <!-- Language badge -->
+  <div class="absolute top-3 right-12 z-10">
+    <span class="px-2 py-0.5 rounded text-xs font-mono text-text-muted bg-bg-surface border border-border-default">
+      {language}
+    </span>
+  </div>
+
+  <!-- Copy button -->
+  <button
+    id={`${blockId}-copy`}
+    class="absolute top-3 right-3 z-10 p-1.5 rounded-md text-text-muted hover:text-text-primary bg-bg-surface border border-border-default transition-colors duration-150"
+    aria-label="Copy code"
+    title="Copy code"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+    </svg>
+  </button>
+
+  <!-- Code content -->
+  <pre
+    id={blockId}
+    class="overflow-x-auto p-5 pt-10 text-sm leading-relaxed font-mono text-text-primary"
+    style="font-family: 'JetBrains Mono', ui-monospace, monospace;"
+  ><code>{code}</code></pre>
+</div>
+
+<script define:vars={{ blockId }}>
+  const btn = document.getElementById(`${blockId}-copy`);
+  const pre = document.getElementById(blockId);
+
+  if (btn && pre) {
+    btn.addEventListener('click', async () => {
+      const code = pre.querySelector('code')?.textContent ?? '';
+      try {
+        await navigator.clipboard.writeText(code);
+        const isEs = document.documentElement.lang === 'es';
+        btn.setAttribute('aria-label', isEs ? '¡Copiado!' : 'Copied!');
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`;
+        setTimeout(() => {
+          btn.setAttribute('aria-label', isEs ? 'Copiar código' : 'Copy code');
+          btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`;
+        }, 2000);
+      } catch {
+        // Clipboard not available — silent fail
+      }
+    });
+  }
+</script>

@@ -1,0 +1,110 @@
+---
+import Section from '../components/Section.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale: _locale, i18n } = Astro.props
+
+// Before content: vanilla agent config — messy, repetitive
+const beforeCode = `# CLAUDE.md (before Gentle AI)
+## Rules
+- Be helpful
+- Write clean code
+
+## Context
+I'm working on a TypeScript project.
+Please remember that we use:
+- ESLint + Prettier
+- Vitest for tests
+- React 19
+
+(Copy-pasted into every project.
+ Agent still starts blind every session.
+ No memory. No structure. No skills.
+ Large tasks go off the rails.
+ Back to square one. Again.)`
+
+// After content: Gentle AI config — structured, persistent
+const afterCode = `# CLAUDE.md (after Gentle AI)
+## Engram Persistent Memory
+All decisions, conventions, and bug fixes
+persist automatically across sessions.
+
+## SDD Pipeline
+/sdd-new <change> -> explore -> propose
+-> spec -> design -> tasks -> apply -> verify
+
+## Skills (auto-loaded by context)
+| Context      | Skill          |
+|--------------|----------------|
+| Go tests     | go-testing     |
+| PR creation  | branch-pr      |
+| Issues       | issue-creation |
+| Review       | judgment-day   |
+
+## Preset Applied: full-gentleman
+8 components configured. All agents ready.
+gentle-ai --preset full-gentleman DONE`
+---
+
+<Section id="before-after" class="relative overflow-hidden">
+  <GlowBlob color="primary" size="md" class="-top-10 left-1/4 opacity-15" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.beforeAfter.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.beforeAfter.description}
+    </p>
+  </div>
+
+  <!-- Custom before/after slider — pure Astro/CSS implementation -->
+  <!-- The island requires ReactNode; we implement our own visual version here -->
+  <div class="relative max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-border-default">
+      <!-- Before panel -->
+      <div class="relative">
+        <div class="absolute top-3 left-3 z-10">
+          <span class="px-2 py-1 rounded bg-bg-elevated/90 text-xs font-mono text-accent-tertiary border border-accent-tertiary/30">
+            {i18n.beforeAfter.beforeLabel}
+          </span>
+        </div>
+        <div class="bg-bg-elevated h-full p-6 pt-12 min-h-64">
+          <pre
+            class="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-mono text-accent-tertiary/70 overflow-auto max-h-80"
+            style="font-family: 'JetBrains Mono', ui-monospace, monospace;"
+          >{beforeCode}</pre>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border-default" aria-hidden="true" />
+
+      <!-- After panel -->
+      <div class="relative border-t md:border-t-0 md:border-l border-border-default">
+        <div class="absolute top-3 left-3 z-10">
+          <span class="px-2 py-1 rounded bg-bg-elevated/90 text-xs font-mono text-accent-primary border border-accent-primary/30">
+            {i18n.beforeAfter.afterLabel}
+          </span>
+        </div>
+        <div class="bg-bg-surface h-full p-6 pt-12 min-h-64">
+          <pre
+            class="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-mono text-accent-primary overflow-auto max-h-80"
+            style="font-family: 'JetBrains Mono', ui-monospace, monospace;"
+          >{afterCode}</pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</Section>

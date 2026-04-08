@@ -1,0 +1,29 @@
+---
+interface Props {
+  color?: 'primary' | 'tertiary' | 'secondary' | 'neutral';
+  class?: string;
+}
+
+const { color = 'primary', class: className } = Astro.props;
+
+const colorClasses: Record<string, string> = {
+  primary: 'bg-accent-primary/10 text-accent-primary border border-accent-primary/30',
+  tertiary: 'bg-accent-tertiary/10 text-accent-tertiary border border-accent-tertiary/30',
+  secondary: 'bg-accent-secondary/10 text-accent-secondary border border-accent-secondary/30',
+  neutral: 'bg-bg-elevated text-text-muted border border-border-default',
+};
+
+const classes = [
+  'inline-flex items-center gap-1.5',
+  'px-3 py-1',
+  'rounded-[var(--radius-badge)]',
+  'text-xs font-mono font-medium',
+  'whitespace-nowrap',
+  colorClasses[color],
+  className ?? '',
+].filter(Boolean).join(' ');
+---
+
+<span class={classes}>
+  <slot />
+</span>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const classes = [
+  'bg-bg-surface',
+  'border border-border-default',
+  'rounded-[var(--radius-card)]',
+  'shadow-[var(--shadow-card)]',
+  className ?? '',
+].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  <slot />
+</div>

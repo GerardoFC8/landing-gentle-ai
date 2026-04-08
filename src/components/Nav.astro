@@ -1,0 +1,151 @@
+---
+import LanguageToggle from '../islands/LanguageToggle.tsx'
+import ThemeToggle from '../islands/ThemeToggle.tsx'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+
+const alternateHref = locale === 'en' ? '/es/' : '/'
+
+type NavKey = 'problem' | 'solution' | 'howItWorks' | 'agents' | 'components' | 'presets' | 'install' | 'community'
+
+const navLinks: Array<{ key: NavKey; href: string }> = [
+  { key: 'problem', href: '#problem' },
+  { key: 'solution', href: '#solution' },
+  { key: 'howItWorks', href: '#how-it-works' },
+  { key: 'agents', href: '#agents' },
+  { key: 'components', href: '#components' },
+  { key: 'install', href: '#install' },
+  { key: 'presets', href: '#presets' },
+  { key: 'community', href: '#community' },
+]
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-bg-base/80 border-b border-border-default"
+  aria-label={locale === 'en' ? 'Main navigation' : 'Navegación principal'}
+>
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <a
+      href={locale === 'en' ? '/' : '/es/'}
+      class="flex items-center gap-2 shrink-0 group"
+      aria-label="Gentle AI — Home"
+    >
+      <div class="w-8 h-8 rounded-lg overflow-hidden shrink-0">
+        <img src="/images/mascot.png" alt="Gentle AI mascot" width="32" height="32" class="w-full h-full object-cover" />
+      </div>
+      <span class="font-heading font-semibold text-text-primary hidden sm:block group-hover:text-accent-primary transition-colors duration-150">
+        Gentle AI
+      </span>
+    </a>
+
+    <!-- Desktop nav links — hidden on mobile -->
+    <div class="hidden md:flex items-center gap-6">
+      {navLinks.map(({ key, href }) => (
+        <a
+          href={href}
+          class="text-sm text-text-muted hover:text-accent-primary transition-colors duration-150 font-body whitespace-nowrap"
+        >
+          {i18n.nav[key]}
+        </a>
+      ))}
+    </div>
+
+    <!-- Right side controls -->
+    <div class="flex items-center gap-2 shrink-0">
+      <LanguageToggle
+        client:idle
+        currentLocale={locale}
+        alternateHref={alternateHref}
+      />
+      <ThemeToggle client:idle />
+
+      <!-- Mobile hamburger — accessible button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu-panel"
+        aria-label={locale === 'en' ? 'Open menu' : 'Abrir menú'}
+        class="md:hidden cursor-pointer p-2 text-text-muted hover:text-text-primary transition-colors duration-150"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div
+    id="mobile-menu-panel"
+    role="navigation"
+    aria-label={locale === 'en' ? 'Mobile navigation' : 'Navegación móvil'}
+    class="md:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-bg-surface border-t border-border-default"
+  >
+    <div class="px-6 py-4 flex flex-col gap-4">
+      {navLinks.map(({ key, href }) => (
+        <a
+          href={href}
+          class="text-sm text-text-muted hover:text-accent-primary transition-colors duration-150 font-body py-1"
+        >
+          {i18n.nav[key]}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  ;(function () {
+    var btn = document.getElementById('mobile-menu-toggle')
+    var panel = document.getElementById('mobile-menu-panel')
+    if (!btn || !panel) return
+
+    function openMenu() {
+      panel.style.maxHeight = panel.scrollHeight + 'px'
+      btn.setAttribute('aria-expanded', 'true')
+      btn.setAttribute('aria-label', document.documentElement.lang === 'es' ? 'Cerrar menú' : 'Close menu')
+    }
+
+    function closeMenu() {
+      panel.style.maxHeight = '0'
+      btn.setAttribute('aria-expanded', 'false')
+      btn.setAttribute('aria-label', document.documentElement.lang === 'es' ? 'Abrir menú' : 'Open menu')
+      btn.focus()
+    }
+
+    btn.addEventListener('click', function () {
+      if (btn.getAttribute('aria-expanded') === 'true') {
+        closeMenu()
+      } else {
+        openMenu()
+      }
+    })
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        closeMenu()
+      }
+    })
+
+    // Close menu when a mobile nav anchor is clicked
+    panel.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          closeMenu()
+        }
+      })
+    })
+  })()
+</script>
+
+<!-- Spacer so content doesn't go under fixed nav -->
+<div class="h-16" aria-hidden="true"></div>

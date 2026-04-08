@@ -1,0 +1,88 @@
+---
+import Section from '../components/Section.astro'
+import SDDFlow from '../islands/SDDFlow.tsx'
+import Card from '../components/ui/Card.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+
+// Build phases array for SDDFlow island — include icon field
+const phaseIcons: Record<string, string> = {
+  init: '🚀',
+  explore: '🔍',
+  propose: '💡',
+  spec: '📋',
+  design: '🏗️',
+  tasks: '✅',
+  apply: '⚡',
+  verify: '🔬',
+  archive: '🗄️',
+}
+
+const phases = i18n.sddPipeline.phases.map((phase) => ({
+  ...phase,
+  icon: phaseIcons[phase.id] ?? '📌',
+}))
+
+const extraSkills = i18n.sddPipeline.extraSkills
+---
+
+<Section id="sdd-pipeline" class="relative overflow-hidden texture-dots">
+  <GlowBlob color="secondary" size="lg" class="-bottom-10 -right-10 opacity-20" />
+  <GlowBlob color="primary" size="sm" class="top-10 left-10 opacity-15" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.sddPipeline.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.sddPipeline.intro}
+    </p>
+  </div>
+
+  <!-- SDDFlow island — SDD phases only -->
+  <div class="relative z-10">
+    <SDDFlow
+      client:visible
+      phases={phases}
+      locale={locale}
+    />
+  </div>
+
+  <!-- Standalone Skills — separate from SDD -->
+  <div class="mt-16 pt-12 border-t border-border-default">
+    <div class="text-center mb-8 max-w-2xl mx-auto">
+      <h3
+        class="font-heading font-bold text-2xl sm:text-3xl text-text-primary mb-3 leading-tight"
+        data-animate
+      >
+        {i18n.sddPipeline.extraSkillsHeadline}
+      </h3>
+      <p class="text-text-muted text-base leading-relaxed" data-animate>
+        {i18n.sddPipeline.extraSkillsIntro}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" data-stagger>
+      {extraSkills.map((skill) => (
+        <Card class="p-4 flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-lg" aria-hidden="true">{skill.icon}</span>
+            <h4 class="font-mono font-semibold text-text-primary text-sm">{skill.label}</h4>
+          </div>
+          <p class="text-text-muted text-xs leading-relaxed">{skill.description}</p>
+        </Card>
+      ))}
+    </div>
+  </div>
+</Section>
