@@ -12,6 +12,7 @@
     "@astrojs/react": "^4.0.0",
     "@astrojs/sitemap": "^3.0.0",
     "@lucide/astro": "1.7.0",
+    "@vercel/analytics": "2.0.1",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.0.0",
     "astro": "^5.0.0",

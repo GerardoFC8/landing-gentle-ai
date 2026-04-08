@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import Analytics from '@vercel/analytics/astro'
 
 export interface Props {
   locale: 'en' | 'es'
@@ -152,5 +153,6 @@ const alternateUrl = locale === 'en'
         })
       })()
     </script>
+    <Analytics />
   </body>
 </html>
