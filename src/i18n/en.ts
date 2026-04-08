@@ -14,6 +14,8 @@ export const en = {
     demo: 'Demo',
     install: 'Install',
     community: 'Community',
+    buildAgent: 'Build Agent',
+    modelIntelligence: 'Model Config',
     toggleTheme: 'Toggle theme',
     switchLang: 'Español',
   },
@@ -310,6 +312,105 @@ export const en = {
         url: 'https://www.youtube.com/@GentlemanProgramming',
       },
     ],
+  },
+
+  engram: {
+    headline: 'Memory that never forgets.',
+    intro:
+      'Engram gives your agents persistent memory across sessions, compactions, and machines. Decisions, conventions, and bug fixes — stored once, recalled forever.',
+    features: {
+      crossSession: {
+        label: 'Cross-session',
+        description: 'Decisions, bugs, conventions survive forever',
+      },
+      crossTool: {
+        label: 'Cross-tool',
+        description: 'Works with Claude Code, OpenCode, Gemini CLI, Cursor, and any MCP-compatible tool',
+      },
+      crossMachine: {
+        label: 'Cross-machine',
+        description: 'Git sync enables memory sharing across all your devices',
+      },
+    },
+    cta: 'Engram has its own story →',
+  },
+
+  buildAgent: {
+    headline: 'Create your own Agent.',
+    intro:
+      'Gentle AI is not just a preset installer — it\'s an extensible platform. Write one Markdown file and your custom agent is installed across all your AI tools automatically.',
+    format: {
+      title: 'Agent Format',
+      description: '# My Custom Agent',
+      trigger: '## Trigger',
+      instructions: '## Instructions',
+    },
+    features: [
+      {
+        icon: '🔌',
+        title: 'One file, all tools',
+        description:
+          'Write once, auto-installed in Claude Code, OpenCode, Gemini CLI, Cursor, VS Code Copilot, Codex, Antigravity, and Windsurf.',
+      },
+      {
+        icon: '🗺️',
+        title: 'SDD integration',
+        description:
+          'Custom agents can enhance existing SDD phases, add new phases to the DAG, or run completely standalone.',
+      },
+      {
+        icon: '🔐',
+        title: 'Collision-safe registry',
+        description:
+          'Built-in registry prevents naming conflicts with built-in skills. Automatic rollback on failure keeps you safe.',
+      },
+    ],
+    sddModes: {
+      headline: 'Integration modes',
+      modes: [
+        { badge: 'SDDPhaseSupport', description: 'Enhances an existing phase' },
+        { badge: 'SDDNewPhase', description: 'Adds a new phase to the pipeline' },
+        { badge: 'SDDStandalone', description: 'Pure standalone skill' },
+      ],
+    },
+  },
+
+  modelIntelligence: {
+    headline: 'Claude Model Assignments.',
+    intro:
+      'Choose how Claude models are assigned to each SDD phase. Opus for architecture. Sonnet for code. Haiku for cleanup. Gentle AI routes each task to the model that handles it best.',
+    presets: {
+      balanced: {
+        name: 'Balanced',
+        description: 'Smart defaults. Opus where it counts, Sonnet for the rest, Haiku for archiving.',
+      },
+      performance: {
+        name: 'Performance',
+        description: 'Maximum quality. Opus for architecture, planning, and verification.',
+      },
+      economy: {
+        name: 'Economy',
+        description: 'Cost-optimised. Sonnet for all phases, Haiku for archiving.',
+      },
+      custom: {
+        name: 'Custom',
+        description: 'Full control. Assign any model to any phase yourself.',
+      },
+    },
+    phaseLabel: 'Phase assignments',
+    profiles: {
+      headline: 'OpenCode SDD Profiles',
+      intro:
+        'Named configurations that save your model assignments and orchestration mode. Switch between setups without reconfiguring anything.',
+      single: {
+        name: 'Single mode',
+        description: 'One agent handles everything — simpler, fewer tokens, great for focused tasks.',
+      },
+      multi: {
+        name: 'Multi mode',
+        description: 'Dedicated sub-agent per SDD phase — more capable, parallel execution, Agent Teams Lite architecture.',
+      },
+    },
   },
 
   finalCta: {

@@ -16,6 +16,8 @@ export const es = {
     demo: 'Demo',
     install: 'Instalación',
     community: 'Comunidad',
+    buildAgent: 'Creá tu Agente',
+    modelIntelligence: 'Config Modelos',
     toggleTheme: 'Cambiar tema',
     switchLang: 'English',
   },
@@ -312,6 +314,105 @@ export const es = {
         url: 'https://www.youtube.com/@GentlemanProgramming',
       },
     ],
+  },
+
+  engram: {
+    headline: 'Memoria que nunca se pierde.',
+    intro:
+      'Engram le da a tus agentes memoria persistente entre sesiones, compactaciones y máquinas. Decisiones, convenciones y bugs resueltos — guardados una vez, recordados para siempre.',
+    features: {
+      crossSession: {
+        label: 'Entre sesiones',
+        description: 'Decisiones, bugs y convenciones sobreviven para siempre',
+      },
+      crossTool: {
+        label: 'Entre herramientas',
+        description: 'Funciona con Claude Code, OpenCode, Gemini CLI, Cursor y cualquier herramienta MCP-compatible',
+      },
+      crossMachine: {
+        label: 'Entre máquinas',
+        description: 'Sincronización vía Git para compartir la memoria entre todos tus dispositivos',
+      },
+    },
+    cta: 'Engram tiene su propia historia →',
+  },
+
+  buildAgent: {
+    headline: 'Creá tu propio Agente.',
+    intro:
+      'Gentle AI no es solo un instalador de presets — es una plataforma extensible. Escribís un archivo Markdown y tu agente personalizado se instala en todas tus herramientas de IA automáticamente.',
+    format: {
+      title: 'Formato del Agente',
+      description: '# Mi Agente Personalizado',
+      trigger: '## Trigger',
+      instructions: '## Instructions',
+    },
+    features: [
+      {
+        icon: '🔌',
+        title: 'Un archivo, todas las herramientas',
+        description:
+          'Escribís una vez, se instala automáticamente en Claude Code, OpenCode, Gemini CLI, Cursor, VS Code Copilot, Codex, Antigravity y Windsurf.',
+      },
+      {
+        icon: '🗺️',
+        title: 'Integración con SDD',
+        description:
+          'Los agentes personalizados pueden mejorar fases SDD existentes, agregar nuevas fases al DAG, o correr de forma completamente independiente.',
+      },
+      {
+        icon: '🔐',
+        title: 'Registry sin colisiones',
+        description:
+          'El registry integrado previene conflictos de nombres con las skills built-in. Rollback automático ante cualquier falla.',
+      },
+    ],
+    sddModes: {
+      headline: 'Modos de integración',
+      modes: [
+        { badge: 'SDDPhaseSupport', description: 'Mejora una fase existente' },
+        { badge: 'SDDNewPhase', description: 'Agrega una nueva fase al pipeline' },
+        { badge: 'SDDStandalone', description: 'Skill completamente independiente' },
+      ],
+    },
+  },
+
+  modelIntelligence: {
+    headline: 'Claude Model Assignments.',
+    intro:
+      'Elegí cómo se asignan los modelos de Claude a cada fase SDD. Opus para arquitectura. Sonnet para código. Haiku para limpieza. Gentle AI enruta cada tarea al modelo que mejor la maneja.',
+    presets: {
+      balanced: {
+        name: 'Balanceado',
+        description: 'Defaults inteligentes. Opus donde importa, Sonnet para el resto, Haiku para archivar.',
+      },
+      performance: {
+        name: 'Performance',
+        description: 'Máxima calidad. Opus para arquitectura, planificación y verificación.',
+      },
+      economy: {
+        name: 'Económico',
+        description: 'Optimizado por costo. Sonnet para todas las fases, Haiku para archivar.',
+      },
+      custom: {
+        name: 'Personalizado',
+        description: 'Control total. Asignás cualquier modelo a cualquier fase vos mismo.',
+      },
+    },
+    phaseLabel: 'Asignación de fases',
+    profiles: {
+      headline: 'Perfiles SDD de OpenCode',
+      intro:
+        'Configuraciones con nombre que guardan tus asignaciones de modelos y el modo de orquestación. Cambiás entre setups sin reconfigurar nada.',
+      single: {
+        name: 'Modo single',
+        description: 'Un agente maneja todo — más simple, menos tokens, ideal para tareas enfocadas.',
+      },
+      multi: {
+        name: 'Modo multi',
+        description: 'Sub-agente dedicado por fase SDD — más capaz, ejecución en paralelo, arquitectura Agent Teams Lite.',
+      },
+    },
   },
 
   finalCta: {

@@ -1,0 +1,193 @@
+---
+import Section from '../components/Section.astro'
+import Card3D from '../islands/Card3D.tsx'
+import Badge from '../components/ui/Badge.astro'
+import Card from '../components/ui/Card.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import { modelPresets } from '../data/model-presets'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { i18n } = Astro.props
+
+type PresetId = 'balanced' | 'performance' | 'economy' | 'custom'
+
+const presetColors: Record<PresetId, 'primary' | 'secondary' | 'tertiary' | 'neutral'> = {
+  balanced: 'primary',
+  performance: 'secondary',
+  economy: 'tertiary',
+  custom: 'neutral',
+}
+
+const modelBadgeColors: Record<string, string> = {
+  opus: 'text-accent-secondary border-accent-secondary/30 bg-accent-secondary/10',
+  sonnet: 'text-accent-primary border-accent-primary/30 bg-accent-primary/10',
+  haiku: 'text-text-muted border-border-default bg-bg-elevated',
+}
+---
+
+<Section id="model-intelligence" class="relative overflow-hidden texture-dots">
+  <GlowBlob color="secondary" size="lg" class="-bottom-10 -left-10 opacity-15" />
+  <GlowBlob color="primary" size="sm" class="top-10 right-10 opacity-10" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.modelIntelligence.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.modelIntelligence.intro}
+    </p>
+  </div>
+
+  <!-- Preset cards grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16" data-stagger>
+    {modelPresets.map((preset) => {
+      const presetKey = preset.id as PresetId
+      const preseti18n = i18n.modelIntelligence.presets[presetKey]
+      const badgeColor = presetColors[presetKey]
+
+      return (
+        <Card3D client:visible>
+          <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-5 flex flex-col gap-4 h-full">
+
+            <!-- Icon + badge -->
+            <div class="flex items-start justify-between gap-2">
+              <div class="text-3xl leading-none" aria-hidden="true">
+                {preset.icon}
+              </div>
+              <Badge color={badgeColor} class="shrink-0 text-[10px]">
+                {preseti18n.name}
+              </Badge>
+            </div>
+
+            <!-- Name + description -->
+            <div class="flex flex-col gap-1.5 flex-1">
+              <h3 class="font-heading font-semibold text-text-primary text-base leading-snug">
+                {preseti18n.name}
+              </h3>
+              <p class="text-text-muted text-xs leading-relaxed">
+                {preseti18n.description}
+              </p>
+            </div>
+
+            <!-- Phase assignments -->
+            {preset.id !== 'custom' && (
+              <div class="flex flex-col gap-1.5 pt-3 border-t border-border-default">
+                <span class="text-[10px] font-mono text-text-muted uppercase tracking-wide">
+                  {i18n.modelIntelligence.phaseLabel}
+                </span>
+                <div class="flex flex-col gap-1">
+                  {preset.phases.map((assignment) => (
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-[10px] font-mono text-text-muted truncate">
+                        {assignment.phase}
+                      </span>
+                      <span
+                        class={[
+                          'inline-flex shrink-0 px-1.5 py-0.5 rounded text-[9px] font-mono font-medium border',
+                          modelBadgeColors[assignment.model] ?? '',
+                        ].join(' ')}
+                      >
+                        {assignment.model}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {preset.id === 'custom' && (
+              <div class="flex flex-col gap-1.5 pt-3 border-t border-border-default">
+                <div class="flex items-center justify-center gap-2 py-3">
+                  <span class="text-2xl" aria-hidden="true">🎛️</span>
+                  <span class="text-xs text-text-muted font-mono">
+                    {preseti18n.description}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </Card3D>
+      )
+    })}
+  </div>
+
+  <!-- OpenCode SDD Profiles subsection -->
+  <div class="border-t border-border-default pt-12">
+    <div class="text-center mb-10 max-w-2xl mx-auto">
+      <h3
+        class="font-heading font-bold text-2xl sm:text-3xl text-text-primary mb-3 leading-tight"
+        data-animate
+      >
+        {i18n.modelIntelligence.profiles.headline}
+      </h3>
+      <p class="text-text-muted text-base leading-relaxed" data-animate>
+        {i18n.modelIntelligence.profiles.intro}
+      </p>
+    </div>
+
+    <!-- Single vs Multi mode cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto" data-stagger>
+      <!-- Single mode -->
+      <Card3D client:visible>
+        <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-6 flex flex-col gap-4">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl" aria-hidden="true">🤖</span>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-semibold text-text-primary text-base">
+                  {i18n.modelIntelligence.profiles.single.name}
+                </h4>
+                <Badge color="neutral" class="text-[10px]">single</Badge>
+              </div>
+              <p class="text-text-muted text-sm leading-relaxed">
+                {i18n.modelIntelligence.profiles.single.description}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-bg-elevated border border-border-default">
+            <span class="text-xs font-mono text-text-muted">profile →</span>
+            <span class="text-xs font-mono text-accent-primary">orchestrator</span>
+            <span class="text-xs text-text-muted">→ all phases</span>
+          </div>
+        </div>
+      </Card3D>
+
+      <!-- Multi mode -->
+      <Card3D client:visible>
+        <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-6 flex flex-col gap-4">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl" aria-hidden="true">👥</span>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <h4 class="font-heading font-semibold text-text-primary text-base">
+                  {i18n.modelIntelligence.profiles.multi.name}
+                </h4>
+                <Badge color="primary" class="text-[10px]">multi</Badge>
+              </div>
+              <p class="text-text-muted text-sm leading-relaxed">
+                {i18n.modelIntelligence.profiles.multi.description}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-bg-elevated border border-border-default flex-wrap">
+            <span class="text-xs font-mono text-text-muted">profile →</span>
+            <span class="text-xs font-mono text-accent-secondary">opus</span>
+            <span class="text-xs text-text-muted">+</span>
+            <span class="text-xs font-mono text-accent-primary">sonnet</span>
+            <span class="text-xs text-text-muted">+</span>
+            <span class="text-xs font-mono text-text-muted">haiku</span>
+          </div>
+        </div>
+      </Card3D>
+    </div>
+  </div>
+</Section>

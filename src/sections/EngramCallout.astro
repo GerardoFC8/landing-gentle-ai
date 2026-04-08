@@ -1,0 +1,71 @@
+---
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { i18n } = Astro.props
+
+const features = [
+  i18n.engram.features.crossSession,
+  i18n.engram.features.crossTool,
+  i18n.engram.features.crossMachine,
+]
+---
+
+<div class="relative overflow-hidden">
+  <!-- Gradient border band -->
+  <div
+    class="max-w-7xl mx-auto px-6 py-8"
+    data-animate
+  >
+    <div
+      class="relative rounded-[var(--radius-card)] border border-accent-primary/30 bg-gradient-to-br from-accent-primary/5 via-bg-surface to-accent-secondary/5 p-6 sm:p-8"
+    >
+      <!-- Subtle ambient glow -->
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 rounded-[var(--radius-card)] pointer-events-none"
+        style="background: radial-gradient(ellipse at 20% 50%, var(--accent-primary, #6366f1)11 0%, transparent 60%);"
+      ></div>
+
+      <div class="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <!-- Left: headline + pills -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-2xl leading-none" aria-hidden="true">🧠</span>
+            <h2 class="font-heading font-bold text-xl sm:text-2xl text-text-primary leading-tight">
+              {i18n.engram.headline}
+            </h2>
+          </div>
+
+          <p class="text-text-muted text-sm leading-relaxed max-w-xl">
+            {i18n.engram.intro}
+          </p>
+
+          <!-- Feature pills inline -->
+          <div class="flex flex-wrap gap-2" data-stagger>
+            {features.map((feature) => (
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-badge)] text-xs font-mono font-medium bg-accent-primary/10 text-accent-primary border border-accent-primary/30 whitespace-nowrap">
+                <span aria-hidden="true">✓</span>
+                {feature.label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: CTA link -->
+        <a
+          href="https://github.com/Gentleman-Programming/engram/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 inline-flex items-center gap-1.5 text-sm font-mono text-accent-primary hover:text-accent-secondary transition-colors duration-150 whitespace-nowrap"
+        >
+          {i18n.engram.cta}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

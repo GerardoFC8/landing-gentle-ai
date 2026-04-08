@@ -1,0 +1,81 @@
+---
+import Section from '../components/Section.astro'
+import Card3D from '../islands/Card3D.tsx'
+import Badge from '../components/ui/Badge.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import CodeBlock from '../components/CodeBlock.astro'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { i18n } = Astro.props
+
+const agentCode = `# My Custom Agent
+
+## Description
+What the agent does — the context that activates it
+and what capabilities it brings to the table.
+
+## Trigger
+When it should activate: specific file patterns,
+slash commands, or contextual keywords.
+
+## Instructions
+The actual behavior and prompt content.
+Full Markdown. Full power.`
+---
+
+<Section id="build-agent" class="relative overflow-hidden">
+  <GlowBlob color="tertiary" size="md" class="-top-10 right-0 opacity-20" />
+
+  <!-- Header -->
+  <div class="text-center mb-12 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.buildAgent.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.buildAgent.intro}
+    </p>
+  </div>
+
+  <!-- Code block + feature cards layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+    <!-- Left: agent format code block -->
+    <div data-animate>
+      <CodeBlock
+        language="markdown"
+        code={agentCode}
+        class="shadow-[var(--shadow-card)]"
+      />
+    </div>
+
+    <!-- Right: feature cards -->
+    <div class="flex flex-col gap-4" data-stagger>
+      {i18n.buildAgent.features.map((feature) => (
+        <Card3D client:visible>
+          <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-5 flex gap-4 items-start">
+            <div class="text-2xl leading-none shrink-0 mt-0.5" aria-hidden="true">
+              {feature.icon}
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="font-heading font-semibold text-text-primary text-base leading-snug">
+                {feature.title}
+              </h3>
+              <p class="text-text-muted text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          </div>
+        </Card3D>
+      ))}
+    </div>
+  </div>
+
+</Section>
