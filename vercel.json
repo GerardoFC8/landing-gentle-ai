@@ -1,11 +1,5 @@
 {
   "buildCommand": "astro build",
   "outputDirectory": "dist",
-  "framework": "astro",
-  "env": {
-    "GITHUB_TOKEN": {
-      "description": "GitHub Personal Access Token with public_repo scope. Required for build-time stats fetch (stars, forks, releases, contributors). Without it the build uses fallback values.",
-      "required": false
-    }
-  }
+  "framework": "astro"
 }
