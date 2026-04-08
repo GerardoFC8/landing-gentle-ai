@@ -425,10 +425,14 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
 
       if (isDisposedRef.current || !containerRef.current) return
 
+      // Scale font to fit 40-char braille logo on small screens
+      const containerWidth = containerRef.current.clientWidth
+      const fontSize = containerWidth < 400 ? 8 : containerWidth < 500 ? 10 : 12
+
       const term = new XTerm({
         theme: ROSE_PINE_THEME,
         fontFamily: '"JetBrains Mono", ui-monospace, monospace',
-        fontSize: 12,
+        fontSize,
         lineHeight: 1,
         cursorBlink: false,
         cursorStyle: 'block',
@@ -521,7 +525,7 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
       {/* xterm container */}
       <div
         ref={containerRef}
-        className="h-[650px]"
+        className="h-[650px] p-2"
       />
 
       {/* Playback controls */}
