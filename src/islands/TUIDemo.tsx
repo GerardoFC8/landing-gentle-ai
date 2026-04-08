@@ -1,4 +1,4 @@
-// xterm CSS is imported dynamically inside init() — not at top level
+import '@xterm/xterm/css/xterm.css'
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { useReducedMotion } from 'motion/react'
 
@@ -430,7 +430,6 @@ export default function TUIDemo({ locale }: TUIDemoProps) {
     let ro: ResizeObserver | null = null
 
     async function init() {
-      await import('@xterm/xterm/css/xterm.css')
       const { Terminal: XTerm } = await import('@xterm/xterm')
       const { FitAddon } = await import('@xterm/addon-fit')
 
