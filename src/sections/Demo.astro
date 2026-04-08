@@ -1,0 +1,35 @@
+---
+import Section from '../components/Section.astro'
+import GlowBlob from '../components/GlowBlob.astro'
+import TUIDemo from '../islands/TUIDemo.tsx'
+import type { I18nStrings, Locale } from '../i18n/utils'
+
+interface Props {
+  locale: Locale
+  i18n: I18nStrings
+}
+
+const { locale, i18n } = Astro.props
+---
+
+<Section id="demo" class="relative overflow-hidden">
+  <GlowBlob color="tertiary" size="md" class="top-0 -right-10 opacity-15" />
+
+  <!-- Header -->
+  <div class="text-center mb-10 max-w-2xl mx-auto">
+    <h2
+      class="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4 leading-tight"
+      data-animate
+    >
+      {i18n.demo.headline}
+    </h2>
+    <p class="text-text-muted text-lg leading-relaxed" data-animate>
+      {i18n.demo.intro}
+    </p>
+  </div>
+
+  <!-- TUI Demo terminal -->
+  <div class="max-w-4xl mx-auto" data-animate>
+    <TUIDemo client:visible locale={locale} />
+  </div>
+</Section>

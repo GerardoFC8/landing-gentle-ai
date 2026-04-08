@@ -13,7 +13,7 @@ export const es = {
     howItWorks: 'Cómo Funciona',
     agents: 'Agentes',
     components: 'Componentes',
-    presets: 'Presets',
+    demo: 'Demo',
     install: 'Instalación',
     community: 'Comunidad',
     toggleTheme: 'Cambiar tema',
@@ -22,7 +22,7 @@ export const es = {
 
   hero: {
     badge: 'Open Source · Licencia MIT',
-    headline: 'Un comando.\nCualquier agente.\nCualquier sistema operativo.',
+    headline: 'Un comando.\nCualquier agente.\nCualquier sistema.',
     subheadline:
       'El ecosistema de Gentleman AI: configurado y listo.',
     ctaInstall: 'Instala Ahora',
@@ -258,6 +258,12 @@ export const es = {
     popular: 'Popular',
   },
 
+  demo: {
+    headline: 'Miralo en acción.',
+    intro:
+      'Así se ve Gentle AI. Un TUI real que te guía por la configuración de agentes, selección de persona, presets del ecosistema y configuración de modelos — todo desde tu terminal.',
+  },
+
   install: {
     headline: 'Instala en segundos.',
     postInstall: [
@@ -326,7 +332,7 @@ export const es = {
           { label: 'Agentes', url: '#agents' },
           { label: 'Componentes', url: '#components' },
           { label: 'Instalación', url: '#install' },
-          { label: 'Presets', url: '#presets' },
+          { label: 'Demo', url: '#demo' },
         ],
       },
       community: {

@@ -9,7 +9,7 @@ import HowItWorks from '../sections/HowItWorks.astro'
 import SDDPipeline from '../sections/SDDPipeline.astro'
 import Agents from '../sections/Agents.astro'
 import Components from '../sections/Components.astro'
-import Presets from '../sections/Presets.astro'
+import Demo from '../sections/Demo.astro'
 import Install from '../sections/Install.astro'
 import Community from '../sections/Community.astro'
 import FinalCTA from '../sections/FinalCTA.astro'
@@ -64,7 +64,7 @@ const [stats, release, contributors] = await Promise.all([
   <Agents locale={locale} i18n={i18n} />
   <Components locale={locale} i18n={i18n} />
   <Install locale={locale} i18n={i18n} />
-  <Presets locale={locale} i18n={i18n} />
+  <Demo locale={locale} i18n={i18n} />
   <Community locale={locale} i18n={i18n} stats={stats} release={release} contributors={contributors} />
   <FinalCTA locale={locale} i18n={i18n} />
 

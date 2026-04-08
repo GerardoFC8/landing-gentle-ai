@@ -77,7 +77,7 @@ export const agents: Agent[] = [
     id: 'antigravity',
     name: 'Antigravity',
     logo: '/images/agents/antigravity.svg',
-    url: 'https://antigravity.dev',
+    url: 'https://antigravity.google',
     badge: 'solo',
     description:
       'Lightweight AI coding assistant. Uses Gentle AI Skills for targeted, task-specific augmentation.',

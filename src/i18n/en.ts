@@ -11,7 +11,7 @@ export const en = {
     howItWorks: 'How It Works',
     agents: 'Agents',
     components: 'Components',
-    presets: 'Presets',
+    demo: 'Demo',
     install: 'Install',
     community: 'Community',
     toggleTheme: 'Toggle theme',
@@ -256,6 +256,12 @@ export const en = {
     popular: 'Popular',
   },
 
+  demo: {
+    headline: 'See it in action.',
+    intro:
+      'This is what Gentle AI looks like. A real TUI that guides you through agent setup, persona selection, ecosystem presets, and model configuration — all from your terminal.',
+  },
+
   install: {
     headline: 'Install in seconds.',
     postInstall: [
@@ -324,7 +330,7 @@ export const en = {
           { label: 'Agents', url: '#agents' },
           { label: 'Components', url: '#components' },
           { label: 'Install', url: '#install' },
-          { label: 'Presets', url: '#presets' },
+          { label: 'Demo', url: '#demo' },
         ],
       },
       community: {
