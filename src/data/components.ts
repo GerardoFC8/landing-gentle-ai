@@ -17,7 +17,7 @@ export const components: GentleComponent[] = [
     id: 'engram',
     name: 'Engram',
     codeName: 'engram',
-    icon: '🧠',
+    icon: 'brain',
     category: 'core',
     description: {
       en: 'Persistent memory that survives across sessions and compaction. Decisions, conventions, bug fixes, and discoveries are stored and recalled automatically — your agent never starts blind.',
@@ -28,7 +28,7 @@ export const components: GentleComponent[] = [
     id: 'sdd',
     name: 'SDD',
     codeName: 'sdd',
-    icon: '🗺️',
+    icon: 'map',
     category: 'core',
     description: {
       en: 'Spec-Driven Development pipeline with 9 phases: init, explore, propose, spec, design, tasks, apply, verify, archive. Breaks large changes into structured, hallucination-resistant workflows.',
@@ -39,7 +39,7 @@ export const components: GentleComponent[] = [
     id: 'skills',
     name: 'Skills',
     codeName: 'skills',
-    icon: '⚡',
+    icon: 'zap',
     category: 'core',
     description: {
       en: 'Reusable agent instructions packaged as Skills. Includes go-testing, branch-pr, issue-creation, skill-creator, and more. Auto-loaded by context — the right skill activates when you need it.',
@@ -50,7 +50,7 @@ export const components: GentleComponent[] = [
     id: 'context7',
     name: 'Context7',
     codeName: 'context7',
-    icon: '📚',
+    icon: 'book-open',
     category: 'enhancement',
     description: {
       en: 'MCP server integration that pulls up-to-date library documentation at query time. No more hallucinated APIs — your agent reads the actual docs before writing code.',
@@ -61,7 +61,7 @@ export const components: GentleComponent[] = [
     id: 'persona',
     name: 'Persona',
     codeName: 'persona',
-    icon: '🎭',
+    icon: 'drama',
     category: 'enhancement',
     description: {
       en: 'Configures your agent\'s personality, tone, language, and expertise level. Defines how your agent communicates — from Rioplatense Spanish to senior architect mindset.',
@@ -72,7 +72,7 @@ export const components: GentleComponent[] = [
     id: 'permissions',
     name: 'Permissions',
     codeName: 'permissions',
-    icon: '🔐',
+    icon: 'lock',
     category: 'config',
     description: {
       en: 'Fine-grained permission rules for what your agent can read, write, execute, and ignore. Prevents accidental writes to sensitive files and keeps the agent in its lane.',
@@ -83,7 +83,7 @@ export const components: GentleComponent[] = [
     id: 'gga',
     name: 'GGA',
     codeName: 'gga',
-    icon: '🤖',
+    icon: 'bot',
     category: 'enhancement',
     description: {
       en: 'Gentleman GitHub Agent integration. Adds issue-first enforcement, PR creation with structured templates, and branch management conventions to your agent\'s workflow.',
@@ -94,7 +94,7 @@ export const components: GentleComponent[] = [
     id: 'theme',
     name: 'Theme',
     codeName: 'theme',
-    icon: '🎨',
+    icon: 'palette',
     category: 'config',
     description: {
       en: 'Configures your agent\'s code style preferences: indentation, quote style, semicolons, import ordering, and formatting conventions. Keeps generated code consistent with your codebase.',

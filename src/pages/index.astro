@@ -7,8 +7,7 @@ import Problem from '../sections/Problem.astro'
 import Solution from '../sections/Solution.astro'
 import HowItWorks from '../sections/HowItWorks.astro'
 import SDDPipeline from '../sections/SDDPipeline.astro'
-import Agents from '../sections/Agents.astro'
-import Components from '../sections/Components.astro'
+import Ecosystem from '../sections/Ecosystem.astro'
 import EngramCallout from '../sections/EngramCallout.astro'
 import BuildAgent from '../sections/BuildAgent.astro'
 import ModelIntelligence from '../sections/ModelIntelligence.astro'
@@ -62,11 +61,10 @@ const [stats, release, contributors] = await Promise.all([
   <Hero locale={locale} i18n={i18n} stats={stats} release={release} />
   <Problem locale={locale} i18n={i18n} />
   <Solution locale={locale} i18n={i18n} />
+  <EngramCallout locale={locale} i18n={i18n} />
   <HowItWorks locale={locale} i18n={i18n} />
   <SDDPipeline locale={locale} i18n={i18n} />
-  <Agents locale={locale} i18n={i18n} />
-  <Components locale={locale} i18n={i18n} />
-  <EngramCallout locale={locale} i18n={i18n} />
+  <Ecosystem locale={locale} i18n={i18n} />
   <BuildAgent locale={locale} i18n={i18n} />
   <ModelIntelligence locale={locale} i18n={i18n} />
   <Demo locale={locale} i18n={i18n} />

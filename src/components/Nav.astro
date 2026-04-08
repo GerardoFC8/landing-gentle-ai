@@ -12,14 +12,13 @@ const { locale, i18n } = Astro.props
 
 const alternateHref = locale === 'en' ? '/es/' : '/'
 
-type NavKey = 'problem' | 'solution' | 'howItWorks' | 'agents' | 'components' | 'buildAgent' | 'modelIntelligence' | 'install' | 'demo' | 'community'
+type NavKey = 'problem' | 'solution' | 'howItWorks' | 'ecosystem' | 'buildAgent' | 'modelIntelligence' | 'install' | 'demo' | 'community'
 
 const navLinks: Array<{ key: NavKey; href: string }> = [
   { key: 'problem', href: '#problem' },
   { key: 'solution', href: '#solution' },
   { key: 'howItWorks', href: '#how-it-works' },
-  { key: 'agents', href: '#agents' },
-  { key: 'components', href: '#components' },
+  { key: 'ecosystem', href: '#ecosystem' },
   { key: 'buildAgent', href: '#build-agent' },
   { key: 'modelIntelligence', href: '#model-intelligence' },
   { key: 'install', href: '#install' },

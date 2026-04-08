@@ -11,8 +11,7 @@ export const es = {
     problem: 'El Problema',
     solution: 'La Solución',
     howItWorks: 'Cómo Funciona',
-    agents: 'Agentes',
-    components: 'Componentes',
+    ecosystem: 'Ecosistema',
     demo: 'Demo',
     install: 'Instalación',
     community: 'Comunidad',
@@ -40,7 +39,7 @@ export const es = {
       '$ gentle-ai --preset full-gentleman',
       '✓ Applied 8 components',
       '✓ Agents configured: Claude Code, Gemini CLI...',
-      '✓ Ready. Happy shipping! 🚀',
+      '✓ Ready. Happy shipping!',
     ],
   },
 
@@ -193,43 +192,36 @@ export const es = {
     extraSkills: [
       {
         id: 'judgment-day',
-        icon: '⚖️',
         label: 'Judgment Day',
         description: 'Revisión adversarial paralela — dos jueces ciegos independientes revisan el mismo objetivo simultáneamente.',
       },
       {
         id: 'skill-registry',
-        icon: '📦',
         label: 'Skill Registry',
         description: 'Escanea las skills instaladas, construye el registro y expone reglas compactas para delegación a sub-agentes.',
       },
       {
         id: 'skill-creator',
-        icon: '🛠️',
         label: 'Skill Creator',
         description: 'Crea nuevas skills de agente siguiendo la spec de Agent Skills — templates SKILL.md, triggers y reglas compactas.',
       },
       {
         id: 'branch-pr',
-        icon: '🔀',
         label: 'Branch PR',
         description: 'Workflow de creación de PRs con enforcement issue-first, resúmenes estructurados y planes de test.',
       },
       {
         id: 'issue-creation',
-        icon: '🎫',
         label: 'Issue Creation',
         description: 'Templates de issues en GitHub para bugs, features y mejoras. Aplica la convención issue-first.',
       },
       {
         id: 'go-testing',
-        icon: '🧪',
         label: 'Go Testing',
         description: 'Patrones de testing en Go incluyendo testing de TUIs con Bubbletea, tests tabla-driven y convenciones de coverage.',
       },
       {
         id: 'sdd-onboard',
-        icon: '🎓',
         label: 'SDD Onboard',
         description: 'Walkthrough guiado de punta a punta del workflow SDD usando tu codebase real.',
       },
@@ -289,9 +281,9 @@ export const es = {
   },
 
   ecosystem: {
-    headline: 'Parte de un ecosistema más grande.',
+    headline: 'El Ecosistema.',
     intro:
-      'Gentle AI es la base del ecosistema Gentleman Programming — una suite de herramientas, cursos y comunidades para desarrolladores modernos.',
+      'Agentes compatibles, componentes configurables, y todo conectado. Esto es lo que se instala cuando corrés un solo comando.',
     projects: [
       {
         name: 'Gentleman.Dots',
@@ -349,19 +341,19 @@ export const es = {
     },
     features: [
       {
-        icon: '🔌',
+        id: 'file-tools',
         title: 'Un archivo, todas las herramientas',
         description:
           'Escribís una vez, se instala automáticamente en Claude Code, OpenCode, Gemini CLI, Cursor, VS Code Copilot, Codex, Antigravity y Windsurf.',
       },
       {
-        icon: '🗺️',
+        id: 'sdd-integration',
         title: 'Integración con SDD',
         description:
           'Los agentes personalizados pueden mejorar fases SDD existentes, agregar nuevas fases al DAG, o correr de forma completamente independiente.',
       },
       {
-        icon: '🔐',
+        id: 'registry',
         title: 'Registry sin colisiones',
         description:
           'El registry integrado previene conflictos de nombres con las skills built-in. Rollback automático ante cualquier falla.',

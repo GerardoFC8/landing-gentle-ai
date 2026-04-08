@@ -3,6 +3,9 @@ import Section from '../components/Section.astro'
 import CodeBlock from '../components/CodeBlock.astro'
 import GlowBlob from '../components/GlowBlob.astro'
 import type { I18nStrings, Locale } from '../i18n/utils'
+import Terminal from '@lucide/astro/icons/terminal'
+import Monitor from '@lucide/astro/icons/monitor'
+import Globe from '@lucide/astro/icons/globe'
 
 interface Props {
   locale: Locale
@@ -30,7 +33,7 @@ const { locale, i18n } = Astro.props
     <!-- Row: macOS / Linux -->
     <div class="flex flex-col gap-3">
       <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
-        <span aria-hidden="true">🍎🐧</span> macOS / Linux
+        <span aria-hidden="true"><Terminal size={18} /></span> macOS / Linux
       </h3>
       <div class="flex flex-col gap-3">
         <div>
@@ -47,7 +50,7 @@ const { locale, i18n } = Astro.props
     <!-- Row: Windows -->
     <div class="flex flex-col gap-3">
       <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
-        <span aria-hidden="true">🪟</span> Windows
+        <span aria-hidden="true"><Monitor size={18} /></span> Windows
       </h3>
       <div class="flex flex-col gap-3">
         <div>
@@ -64,7 +67,7 @@ const { locale, i18n } = Astro.props
     <!-- Row: Any platform -->
     <div class="flex flex-col gap-3">
       <h3 class="font-heading font-semibold text-text-primary text-lg flex items-center gap-2">
-        <span aria-hidden="true">🌐</span>
+        <span aria-hidden="true"><Globe size={18} /></span>
         {locale === 'en' ? 'Any platform (Go 1.24+)' : 'Cualquier plataforma (Go 1.24+)'}
       </h3>
       <CodeBlock language="bash" code="go install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest" />

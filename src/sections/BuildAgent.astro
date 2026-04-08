@@ -5,6 +5,9 @@ import Badge from '../components/ui/Badge.astro'
 import GlowBlob from '../components/GlowBlob.astro'
 import CodeBlock from '../components/CodeBlock.astro'
 import type { I18nStrings, Locale } from '../i18n/utils'
+import FileText from '@lucide/astro/icons/file-text'
+import Puzzle from '@lucide/astro/icons/puzzle'
+import ShieldCheck from '@lucide/astro/icons/shield-check'
 
 interface Props {
   locale: Locale
@@ -61,8 +64,10 @@ Full Markdown. Full power.`
       {i18n.buildAgent.features.map((feature) => (
         <Card3D client:visible>
           <div class="bg-bg-surface border border-border-default rounded-[var(--radius-card)] shadow-[var(--shadow-card)] p-5 flex gap-4 items-start">
-            <div class="text-2xl leading-none shrink-0 mt-0.5" aria-hidden="true">
-              {feature.icon}
+            <div class="shrink-0 mt-0.5 text-accent-primary" aria-hidden="true">
+              {feature.id === 'file-tools' && <FileText size={22} />}
+              {feature.id === 'sdd-integration' && <Puzzle size={22} />}
+              {feature.id === 'registry' && <ShieldCheck size={22} />}
             </div>
             <div class="flex flex-col gap-1.5">
               <h3 class="font-heading font-semibold text-text-primary text-base leading-snug">

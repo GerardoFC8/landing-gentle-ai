@@ -4,6 +4,13 @@ import SDDFlow from '../islands/SDDFlow.tsx'
 import Card from '../components/ui/Card.astro'
 import GlowBlob from '../components/GlowBlob.astro'
 import type { I18nStrings, Locale } from '../i18n/utils'
+import Scale from '@lucide/astro/icons/scale'
+import List from '@lucide/astro/icons/list'
+import PlusCircle from '@lucide/astro/icons/circle-plus'
+import GitPullRequest from '@lucide/astro/icons/git-pull-request'
+import AlertCircle from '@lucide/astro/icons/circle-alert'
+import TestTube from '@lucide/astro/icons/test-tube'
+import GraduationCap from '@lucide/astro/icons/graduation-cap'
 
 interface Props {
   locale: Locale
@@ -12,22 +19,10 @@ interface Props {
 
 const { locale, i18n } = Astro.props
 
-// Build phases array for SDDFlow island — include icon field
-const phaseIcons: Record<string, string> = {
-  init: '🚀',
-  explore: '🔍',
-  propose: '💡',
-  spec: '📋',
-  design: '🏗️',
-  tasks: '✅',
-  apply: '⚡',
-  verify: '🔬',
-  archive: '🗄️',
-}
-
+// phases still need an icon field — SDDFlow renders icons via inline SVG lookup internally
 const phases = i18n.sddPipeline.phases.map((phase) => ({
   ...phase,
-  icon: phaseIcons[phase.id] ?? '📌',
+  icon: phase.id, // pass the id as the icon field; SDDFlow uses its own icon map
 }))
 
 const extraSkills = i18n.sddPipeline.extraSkills
@@ -77,7 +72,15 @@ const extraSkills = i18n.sddPipeline.extraSkills
       {extraSkills.map((skill) => (
         <Card class="p-4 flex flex-col gap-2">
           <div class="flex items-center gap-2">
-            <span class="text-lg" aria-hidden="true">{skill.icon}</span>
+            <span aria-hidden="true">
+              {skill.id === 'judgment-day' && <Scale size={18} class="text-accent-primary" />}
+              {skill.id === 'skill-registry' && <List size={18} class="text-accent-secondary" />}
+              {skill.id === 'skill-creator' && <PlusCircle size={18} class="text-accent-tertiary" />}
+              {skill.id === 'branch-pr' && <GitPullRequest size={18} class="text-accent-primary" />}
+              {skill.id === 'issue-creation' && <AlertCircle size={18} class="text-accent-secondary" />}
+              {skill.id === 'go-testing' && <TestTube size={18} class="text-accent-tertiary" />}
+              {skill.id === 'sdd-onboard' && <GraduationCap size={18} class="text-accent-primary" />}
+            </span>
             <h4 class="font-mono font-semibold text-text-primary text-sm">{skill.label}</h4>
           </div>
           <p class="text-text-muted text-xs leading-relaxed">{skill.description}</p>

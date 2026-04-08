@@ -5,6 +5,14 @@ import Badge from '../components/ui/Badge.astro'
 import GlowBlob from '../components/GlowBlob.astro'
 import { components } from '../data/components'
 import type { I18nStrings, Locale } from '../i18n/utils'
+import Brain from '@lucide/astro/icons/brain'
+import Map from '@lucide/astro/icons/map'
+import Zap from '@lucide/astro/icons/zap'
+import BookOpen from '@lucide/astro/icons/book-open'
+import Drama from '@lucide/astro/icons/drama'
+import Lock from '@lucide/astro/icons/lock'
+import Bot from '@lucide/astro/icons/bot'
+import Palette from '@lucide/astro/icons/palette'
 
 interface Props {
   locale: Locale
@@ -44,8 +52,15 @@ const categoryColor: Record<string, 'primary' | 'secondary' | 'neutral'> = {
 
           <!-- Icon + Code badge -->
           <div class="flex items-start justify-between gap-2">
-            <div class="text-3xl leading-none" aria-hidden="true">
-              {component.icon}
+            <div class="text-accent-primary" aria-hidden="true">
+              {component.icon === 'brain' && <Brain size={28} />}
+              {component.icon === 'map' && <Map size={28} />}
+              {component.icon === 'zap' && <Zap size={28} />}
+              {component.icon === 'book-open' && <BookOpen size={28} />}
+              {component.icon === 'drama' && <Drama size={28} />}
+              {component.icon === 'lock' && <Lock size={28} />}
+              {component.icon === 'bot' && <Bot size={28} />}
+              {component.icon === 'palette' && <Palette size={28} />}
             </div>
             <Badge color={categoryColor[component.category] ?? 'neutral'} class="shrink-0 text-[10px]">
               {component.codeName}

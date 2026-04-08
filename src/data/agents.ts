@@ -7,6 +7,7 @@ export interface Agent {
   url: string;
   badge: AgentBadge;
   description: string;
+  darkInvert?: boolean;
 }
 
 export const agents: Agent[] = [
@@ -43,6 +44,7 @@ export const agents: Agent[] = [
     logo: '/images/agents/cursor.svg',
     url: 'https://cursor.sh',
     badge: 'full',
+    darkInvert: true,
     description:
       'AI-first IDE with deep codebase understanding. Runs SDD phases inline via the cursor rules convention.',
   },
@@ -52,6 +54,7 @@ export const agents: Agent[] = [
     logo: '/images/agents/vscode-copilot.svg',
     url: 'https://github.com/features/copilot',
     badge: 'full',
+    darkInvert: true,
     description:
       'GitHub Copilot in VS Code with agent mode. Supports full SDD delegation via the .github/copilot-instructions.md convention.',
   },
@@ -70,6 +73,7 @@ export const agents: Agent[] = [
     logo: '/images/agents/windsurf.svg',
     url: 'https://codeium.com/windsurf',
     badge: 'solo',
+    darkInvert: true,
     description:
       'Codeium\'s agentic IDE. Integrates Gentle AI Skills and Engram memory for single-session coding tasks.',
   },

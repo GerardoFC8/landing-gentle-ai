@@ -29,7 +29,7 @@ export type PhaseName = (typeof PHASES)[number];
 export const modelPresets: ModelPreset[] = [
   {
     id: 'balanced',
-    icon: '⚖️',
+    icon: 'scale',
     phases: [
       { phase: 'orchestrator', model: 'opus' },
       { phase: 'sdd-propose', model: 'opus' },
@@ -44,7 +44,7 @@ export const modelPresets: ModelPreset[] = [
   },
   {
     id: 'performance',
-    icon: '🚀',
+    icon: 'rocket',
     phases: [
       { phase: 'orchestrator', model: 'opus' },
       { phase: 'sdd-propose', model: 'opus' },
@@ -59,7 +59,7 @@ export const modelPresets: ModelPreset[] = [
   },
   {
     id: 'economy',
-    icon: '💰',
+    icon: 'circle-dollar-sign',
     phases: [
       { phase: 'orchestrator', model: 'sonnet' },
       { phase: 'sdd-propose', model: 'sonnet' },
@@ -74,7 +74,7 @@ export const modelPresets: ModelPreset[] = [
   },
   {
     id: 'custom',
-    icon: '🎛️',
+    icon: 'settings',
     phases: [
       { phase: 'orchestrator', model: 'sonnet' },
       { phase: 'sdd-propose', model: 'sonnet' },

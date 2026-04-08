@@ -3,6 +3,9 @@ import Section from '../components/Section.astro'
 import Card from '../components/ui/Card.astro'
 import GlowBlob from '../components/GlowBlob.astro'
 import type { I18nStrings, Locale } from '../i18n/utils'
+import Frown from '@lucide/astro/icons/frown'
+import Skull from '@lucide/astro/icons/skull'
+import Flame from '@lucide/astro/icons/flame'
 
 interface Props {
   locale: Locale
@@ -10,8 +13,6 @@ interface Props {
 }
 
 const { i18n } = Astro.props
-
-const icons = ['😩', '🤯', '💀']
 ---
 
 <Section id="problem" class="relative overflow-hidden">
@@ -39,8 +40,10 @@ const icons = ['😩', '🤯', '💀']
     {i18n.problem.points.map((point, index) => (
       <Card class="p-6 flex flex-col gap-4 hover:border-accent-tertiary/40 transition-colors duration-300">
         <!-- Icon -->
-        <div class="text-4xl leading-none" aria-hidden="true">
-          {icons[index]}
+        <div class="text-accent-tertiary" aria-hidden="true">
+          {index === 0 && <Frown size={36} />}
+          {index === 1 && <Skull size={36} />}
+          {index === 2 && <Flame size={36} />}
         </div>
 
         <!-- Number accent -->

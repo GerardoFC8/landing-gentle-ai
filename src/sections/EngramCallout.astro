@@ -1,5 +1,6 @@
 ---
 import type { I18nStrings, Locale } from '../i18n/utils'
+import Brain from '@lucide/astro/icons/brain'
 
 interface Props {
   locale: Locale
@@ -35,7 +36,7 @@ const features = [
         <!-- Left: headline + pills -->
         <div class="flex flex-col gap-3">
           <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-2xl leading-none" aria-hidden="true">🧠</span>
+            <Brain size={24} class="text-accent-primary" aria-hidden="true" />
             <h2 class="font-heading font-bold text-xl sm:text-2xl text-text-primary leading-tight">
               {i18n.engram.headline}
             </h2>

@@ -2,12 +2,37 @@ import { useState, useRef, useCallback } from 'react';
 import type { KeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 
+// Inline SVG paths — avoids lucide-react dependency in this island
+const phaseIconPaths: Record<string, string> = {
+  init: 'M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z M9 12H4s.55-3.03 2-4c1.62-1.08 3 0 3 0 M12 15v5s3.03-.55 4-2c1.08-1.62 0-3 0-3',
+  explore: 'M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm10 18-3.5-3.5',
+  propose: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5 M9 18h6 M10 22h4',
+  spec: 'M8 2v4 M16 2v4 M3 10h18 M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z M8 14h.01 M12 14h.01 M16 14h.01 M8 18h.01 M12 18h.01',
+  design: 'M12 3 2 7l10 6 10-6-10-4z M2 17l10 6 10-6 M2 12l10 6 10-6',
+  tasks: 'M9 11l3 3L22 4 M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11',
+  apply: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+  verify: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4',
+  archive: 'M21 8V21H3V8 M1 3h22v5H1z M10 12h4',
+};
+
 interface Phase {
   id: string;
   label: string;
   description: string;
   whenToUse: string;
   icon: string;
+}
+
+function PhaseIcon({ id, size }: { id: string; size: number }) {
+  const d = phaseIconPaths[id];
+  if (!d) return null;
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {d.split(' M').map((segment, i) => (
+        <path key={i} d={i === 0 ? segment : `M${segment}`} />
+      ))}
+    </svg>
+  );
 }
 
 interface SDDFlowProps {
@@ -91,7 +116,7 @@ export default function SDDFlow({ phases, locale }: SDDFlowProps) {
                   : 'border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent-primary)]/50 hover:text-[var(--text-primary)]',
               ].join(' ')}
             >
-              <span aria-hidden="true">{phase.icon}</span>
+              <PhaseIcon id={phase.id} size={16} />
               <span>{phase.label}</span>
             </button>
           );
@@ -150,9 +175,7 @@ export default function SDDFlow({ phases, locale }: SDDFlowProps) {
             className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-6 space-y-4"
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl" aria-hidden="true">
-                {selectedPhase.icon}
-              </span>
+              <PhaseIcon id={selectedPhase.id} size={24} />
               <h3 className="font-heading text-lg font-semibold text-[var(--text-primary)]">
                 {selectedPhase.label}
               </h3>
