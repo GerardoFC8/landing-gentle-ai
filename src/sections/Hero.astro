@@ -84,6 +84,7 @@ const headlineLines = i18n.hero.headline.split('\n')
         {headlineLines.map((line, i) => (
           <span class={[
             'block',
+            i === 0 && locale === 'es' ? 'whitespace-nowrap' : '',
             i < headlineLines.length - 1
               ? 'text-text-primary'
               : 'bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-primary bg-clip-text text-transparent',
