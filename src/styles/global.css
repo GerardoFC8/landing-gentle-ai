@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Custom cursor — bigote on pointer elements */
+a, button, [role="button"], input[type="submit"], .cursor-pointer {
+  cursor: url('/images/cursor-bigote.png'), pointer;
+}
+
 /* ============================================================
    DESIGN TOKENS — @theme maps CSS vars to Tailwind utilities
    ============================================================ */
