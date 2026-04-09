@@ -41,7 +41,7 @@ export const presets: Preset[] = [
     command: 'gentle-ai --preset ecosystem-only',
     description: {
       en: 'Everything except the Theme configurator. Perfect for teams that already have a code style setup or prefer to manage formatting separately.',
-      es: 'Todo excepto el configurador de Theme. Perfecto para equipos que ya tienen un setup de estilo de código o prefieren manejar el formato por separado.',
+      es: 'Todo excepto el configurador de Theme. Ideal para equipos que ya tienen definido su estilo de código o prefieren manejar el formateo por separado.',
     },
   },
   {
@@ -55,7 +55,7 @@ export const presets: Preset[] = [
     command: 'gentle-ai --preset minimal',
     description: {
       en: 'Just the essentials: persistent memory, structured workflows, and reusable Skills. The lightest configuration — great for experimenting or adding to an existing agent setup.',
-      es: 'Solo lo esencial: memoria persistente, workflows estructurados y Skills reutilizables. La configuración más liviana — ideal para experimentar o agregar a un setup de agente existente.',
+      es: 'Solo lo esencial: memoria persistente, workflows estructurados y Skills reutilizables. La configuración más liviana: ideal para experimentar o sumar a un setup de agente existente.',
     },
   },
   {
@@ -69,7 +69,7 @@ export const presets: Preset[] = [
     command: 'gentle-ai --component engram --component sdd --component skills',
     description: {
       en: 'Pick exactly the components you need. Use --component flags to mix and match. The most flexible option for advanced users who know what they want.',
-      es: 'Elegí exactamente los componentes que necesitás. Usá los flags --component para combinar. La opción más flexible para usuarios avanzados que saben lo que quieren.',
+      es: 'Elige exactamente los componentes que necesitas. Usa los flags --component para combinar. La opción más flexible para usuarios avanzados que saben lo que quieren.',
     },
   },
 ];

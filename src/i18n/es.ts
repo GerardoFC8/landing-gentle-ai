@@ -1,5 +1,3 @@
-import type { en } from './en';
-
 export const es = {
   meta: {
     title: 'Gentle AI — Agentes de IA para el Ecosistema Gentleman Programming',
@@ -15,18 +13,18 @@ export const es = {
     demo: 'Demo',
     install: 'Instalación',
     community: 'Comunidad',
-    buildAgent: 'Creá tu Agente',
-    modelIntelligence: 'Config Modelos',
+    buildAgent: 'Crea tu Agente',
+    modelIntelligence: 'Config. de modelos',
     toggleTheme: 'Cambiar tema',
     switchLang: 'English',
   },
 
   hero: {
     badge: 'Open Source · Licencia MIT',
-    headline: 'Un comando.\nCualquier agente.\nCualquier sistema.',
+    headline: 'Un comando.\nCualquier agente.\nCualquier OS.',
     subheadline:
-      'El ecosistema de Gentleman AI: configurado y listo.',
-    ctaInstall: 'Instala Ahora',
+      'El ecosistema Gentle AI, configurado y listo.',
+    ctaInstall: 'Instala ahora',
     ctaGithub: 'Ver en GitHub',
     terminalCommands: [
       '$ brew install gentle-ai',
@@ -46,12 +44,12 @@ export const es = {
   problem: {
     headline: 'Todos los proyectos empiezan igual.',
     intro:
-      'Abrís un repo nuevo, abrís tu agente de IA y pasás la próxima hora configurando las mismas cosas que configuraste la semana pasada.',
+      'Abres un repo nuevo, abres tu agente de IA y pasas la próxima hora configurando las mismas cosas que configuraste la semana pasada.',
     points: [
       {
         title: 'Siempre pegando los mismos prompts',
         description:
-          'La memoria no persiste. Cada sesión empieza de cero. Tenés que re-explicar tus convenciones, tu stack, tus preferencias — siempre, siempre, siempre.',
+          'La memoria no persiste. Cada sesión empieza de cero. Tienes que volver a explicar tus convenciones, tu stack y tus preferencias — una y otra vez.',
       },
       {
         title: 'Cada agente se comporta distinto',
@@ -61,7 +59,7 @@ export const es = {
       {
         title: 'Sin estructura para cambios grandes',
         description:
-          'Los agentes alucinan cuando el scope es amplio. Sin un workflow claro — spec, diseño, tareas, implementación — derivan y producen basura.',
+          'Los agentes alucinan cuando el scope es amplio. Sin un workflow claro — Spec, Design, Tasks, Apply — derivan y producen basura.',
       },
     ],
   },
@@ -69,7 +67,7 @@ export const es = {
   solution: {
     headline: 'Una config. Todos los agentes. Listo para producción.',
     intro:
-      'Gentle AI es la capa que faltaba entre tu codebase y tus agentes de IA. Configurás una vez, compartís en todos lados.',
+      'Gentle AI es la capa que faltaba entre tu codebase y tus agentes de IA. Configuras una vez y compartes en todos lados.',
     pillars: [
       {
         title: 'Engram — Memoria Persistente',
@@ -79,12 +77,12 @@ export const es = {
       {
         title: 'SDD — Entrega Estructurada',
         description:
-          'Spec-Driven Development divide los cambios grandes en propuesta → spec → diseño → tareas → aplicar → verificar. Sin alucinaciones en tareas complejas.',
+          'Spec-Driven Development divide los cambios grandes en Propose → Spec → Design → Tasks → Apply → Verify. Sin alucinaciones en tareas complejas.',
       },
       {
         title: 'Skills — Expertise Reutilizable',
         description:
-          'Instrucciones de agente empaquetadas para testing, creación de PRs, code review y más. Instalás una vez y todos tus agentes se benefician.',
+          'Instrucciones de agente empaquetadas para testing, creación de PRs, code review y más. Instalas una vez y todos tus agentes se benefician.',
       },
     ],
   },
@@ -96,23 +94,23 @@ export const es = {
         number: '01',
         title: 'Instala Gentle AI',
         description:
-          'Un comando via Homebrew, curl, Scoop o Go. Gentle AI disponible en macOS, Linux y Windows.',
+          'Un comando vía Homebrew, curl, Scoop o Go. Gentle AI disponible en macOS, Linux y Windows.',
       },
       {
         number: '02',
-        title: 'Elegí un preset',
+        title: 'Elige un preset',
         description:
-          'Usá full-gentleman para todo, ecosystem-only para el stack principal, o minimal para lo esencial. O combiná componentes a tu gusto.',
+          'Usa full-gentleman para todo, ecosystem-only para el stack principal, o minimal para lo esencial. También puedes combinar componentes a tu gusto.',
       },
       {
         number: '03',
-        title: 'Abrí tu agente de IA',
+        title: 'Abre tu agente de IA',
         description:
           'Claude Code, Gemini CLI, Cursor — tu agente ya tiene memoria Engram, pipelines SDD, Skills y tus convenciones pre-cargadas.',
       },
       {
         number: '04',
-        title: 'Enviá más rápido',
+        title: 'Envía más rápido',
         description:
           'Sin repetir contexto. Sin alucinaciones en tareas grandes. Solo desarrollo limpio, estructurado y potenciado por IA.',
       },
@@ -124,7 +122,7 @@ export const es = {
     beforeLabel: 'Antes',
     afterLabel: 'Después',
     description:
-      'Mirá la diferencia que hace Gentle AI en tu workflow de desarrollo con IA.',
+      'Mira la diferencia que hace Gentle AI en tu workflow de desarrollo con IA.',
   },
 
   sddPipeline: {
@@ -136,55 +134,55 @@ export const es = {
         id: 'init',
         label: 'Init',
         description: 'Inicializa el contexto SDD en un proyecto.',
-        whenToUse: 'La primera vez que usás SDD en un proyecto. Detecta stack, convenciones y capacidades de testing. Correlo una vez por repo.',
+        whenToUse: 'La primera vez que usas SDD en un proyecto. Detecta stack, convenciones y capacidades de testing. Ejecútalo una vez por repo.',
       },
       {
         id: 'explore',
         label: 'Explore',
         description: 'Investiga el codebase antes de comprometerte con un cambio.',
-        whenToUse: 'Cuando necesitás entender el espacio del problema, comparar enfoques o exponer tradeoffs — sin crear artefactos.',
+        whenToUse: 'Cuando necesitas entender el espacio del problema, comparar enfoques o exponer tradeoffs — sin crear artefactos.',
       },
       {
         id: 'propose',
         label: 'Propose',
         description: 'Crea una propuesta de cambio con intención, scope y enfoque.',
-        whenToUse: 'El punto de entrada para cualquier cambio sustancial. Define qué querés hacer y por qué.',
+        whenToUse: 'El punto de entrada para cualquier cambio sustancial. Define qué quieres hacer y por qué.',
       },
       {
         id: 'spec',
         label: 'Spec',
         description: 'Escribe especificaciones con requisitos y escenarios.',
-        whenToUse: 'Después de aprobar la propuesta. Define cómo se ve el éxito antes de escribir una línea de código.',
+        whenToUse: 'Después de aprobar Propose. Define cómo se ve el éxito antes de escribir una línea de código.',
       },
       {
         id: 'design',
         label: 'Design',
         description: 'Diseño técnico con decisiones de arquitectura.',
-        whenToUse: 'Después del spec. Produce el plano: contratos de componentes, flujos de datos y riesgos clave.',
+        whenToUse: 'Después de Spec. Produce el plano: contratos de componentes, flujos de datos y riesgos clave.',
       },
       {
         id: 'tasks',
         label: 'Tasks',
         description: 'Divide un cambio en tareas de implementación.',
-        whenToUse: 'Después del diseño. Crea un checklist ordenado con dependencias claras.',
+        whenToUse: 'Después de Design. Crea un checklist ordenado con dependencias claras.',
       },
       {
         id: 'apply',
         label: 'Apply',
-        description: 'Implementa tareas siguiendo specs y diseño.',
+        description: 'Implementa tareas siguiendo Spec y Design.',
         whenToUse: 'La fase de ejecución. Trabaja en lotes, soporta implementación multi-sesión sin perder estado.',
       },
       {
         id: 'verify',
         label: 'Verify',
-        description: 'Valida que la implementación coincida con los specs.',
-        whenToUse: 'Después de aplicar. Reporta hallazgos CRITICAL, WARNING y SUGGESTION antes de llegar a producción.',
+        description: 'Valida que la implementación coincida con Spec.',
+        whenToUse: 'Después de Apply. Reporta hallazgos CRITICAL, WARNING y SUGGESTION antes de llegar a producción.',
       },
       {
         id: 'archive',
         label: 'Archive',
-        description: 'Sincroniza specs delta con los principales y archiva.',
-        whenToUse: 'Después de verificar. Persiste el estado final en Engram y cierra el cambio.',
+        description: 'Sincroniza delta specs con main specs y archiva.',
+        whenToUse: 'Después de Verify. Persiste el estado final en Engram y cierra el cambio.',
       },
     ],
     extraSkillsHeadline: 'Skills Independientes',
@@ -239,21 +237,21 @@ export const es = {
   },
 
   components: {
-    headline: 'Combiná componentes a tu medida.',
+    headline: 'Combina componentes a tu medida.',
     intro:
-      'Gentle AI es modular. Cada componente agrega capacidades específicas. Usá presets para arrancar o elegí componentes individuales para una configuración personalizada.',
+      'Gentle AI es modular. Cada componente agrega capacidades específicas. Usa presets para empezar o elige componentes individuales para una configuración personalizada.',
   },
 
   presets: {
     headline: 'Presets para cada workflow.',
     intro:
-      'Arrancá con un preset y personalizá desde ahí. Cada preset es un conjunto curado de componentes optimizado para un caso de uso específico.',
+      'Empieza con un preset y personalízalo desde ahí. Cada preset es un conjunto curado de componentes optimizado para un caso de uso específico.',
     recommended: 'Recomendado',
     popular: 'Popular',
   },
 
   demo: {
-    headline: 'Miralo en acción.',
+    headline: 'Míralo en acción.',
     intro:
       'Así se ve Gentle AI. Un TUI real que te guía por la configuración de agentes, selección de persona, presets del ecosistema y configuración de modelos — todo desde tu terminal.',
   },
@@ -265,15 +263,15 @@ export const es = {
     postInstall: [
       'Ejecuta `gentle-ai --version` para verificar la instalación',
       'Ejecuta `gentle-ai --preset full-gentleman` para aplicar el preset completo',
-      'Abrí tu agente de IA y empezá a enviar código',
+      'Abre tu agente de IA y empieza a enviar código',
     ],
   },
 
   community: {
     headline: 'Construido con la comunidad.',
     intro:
-      'Gentle AI es open source y dirigido por la comunidad. Unite a miles de desarrolladores que envían código más rápido con IA.',
-    discord: 'Uníte a nuestro Discord',
+      'Gentle AI es open source y está impulsado por la comunidad. Únete a miles de desarrolladores que envían código más rápido con IA.',
+    discord: 'Únete a nuestro Discord',
     contributorsLabel: 'Contribuidores',
     labels: {
       stars: 'GitHub Stars',
@@ -286,7 +284,7 @@ export const es = {
   ecosystem: {
     headline: 'El Ecosistema.',
     intro:
-      'Agentes compatibles, componentes configurables, y todo conectado. Esto es lo que se instala cuando corrés un solo comando.',
+      'Agentes compatibles, componentes configurables y todo conectado. Esto es lo que se instala cuando ejecutas un solo comando.',
     projects: [
       {
         name: 'Gentleman.Dots',
@@ -314,11 +312,11 @@ export const es = {
   engram: {
     headline: 'Memoria que nunca se pierde.',
     intro:
-      'Engram le da a tus agentes memoria persistente entre sesiones, compactaciones y máquinas. Decisiones, convenciones y bugs resueltos — guardados una vez, recordados para siempre.',
+      'Engram le da a tus agentes memoria persistente entre sesiones, compactaciones y dispositivos. Decisiones, convenciones y bugs resueltos: lo guardas una vez y lo recuerdas siempre.',
     features: {
       crossSession: {
         label: 'Entre sesiones',
-        description: 'Decisiones, bugs y convenciones sobreviven para siempre',
+        description: 'Decisiones, bugs y convenciones persisten para siempre',
       },
       crossTool: {
         label: 'Entre herramientas',
@@ -333,9 +331,9 @@ export const es = {
   },
 
   buildAgent: {
-    headline: 'Creá tu propio Agente.',
+    headline: 'Crea tu propio Agente.',
     intro:
-      'Gentle AI no es solo un instalador de presets — es una plataforma extensible. Escribís un archivo Markdown y tu agente personalizado se instala en todas tus herramientas de IA automáticamente.',
+      'Gentle AI no es solo un instalador de presets — es una plataforma extensible. Escribes un archivo Markdown y tu agente personalizado se instala en todas tus herramientas de IA automáticamente.',
     format: {
       title: 'Formato del Agente',
       description: '# Mi Agente Personalizado',
@@ -347,7 +345,7 @@ export const es = {
         id: 'file-tools',
         title: 'Un archivo, todas las herramientas',
         description:
-          'Escribís una vez, se instala automáticamente en Claude Code, OpenCode, Gemini CLI, Cursor, VS Code Copilot, Codex, Antigravity y Windsurf.',
+          'Escribes una vez y se instala automáticamente en Claude Code, OpenCode, Gemini CLI, Cursor, VS Code Copilot, Codex, Antigravity y Windsurf.',
       },
       {
         id: 'sdd-integration',
@@ -359,7 +357,7 @@ export const es = {
         id: 'registry',
         title: 'Registry sin colisiones',
         description:
-          'El registry integrado previene conflictos de nombres con las skills built-in. Rollback automático ante cualquier falla.',
+          'El registry integrado evita conflictos de nombres con las skills built-in. Rollback automático ante cualquier falla.',
       },
     ],
     sddModes: {
@@ -375,7 +373,7 @@ export const es = {
   modelIntelligence: {
     headline: 'Claude Model Assignments.',
     intro:
-      'Elegí cómo se asignan los modelos de Claude a cada fase SDD. Opus para arquitectura. Sonnet para código. Haiku para limpieza. Gentle AI enruta cada tarea al modelo que mejor la maneja.',
+      'Elige cómo se asignan los modelos de Claude a cada fase SDD. Opus para arquitectura. Sonnet para código. Haiku para limpieza. Gentle AI enruta cada tarea al modelo que mejor la maneja.',
     presets: {
       balanced: {
         name: 'Balanceado',
@@ -391,17 +389,17 @@ export const es = {
       },
       custom: {
         name: 'Personalizado',
-        description: 'Control total. Asignás cualquier modelo a cualquier fase vos mismo.',
+        description: 'Control total. Asignas cualquier modelo a cualquier fase por tu cuenta.',
       },
     },
     phaseLabel: 'Asignación de fases',
     profiles: {
       headline: 'Perfiles SDD de OpenCode',
       intro:
-        'Configuraciones con nombre que guardan tus asignaciones de modelos y el modo de orquestación. Cambiás entre setups sin reconfigurar nada.',
+        'Configuraciones con nombre que guardan tus asignaciones de modelos y el modo de orquestación. Cambias entre setups sin reconfigurar nada.',
       single: {
         name: 'Modo single',
-        description: 'Un agente maneja todo — más simple, menos tokens, ideal para tareas enfocadas.',
+        description: 'Un agente maneja todo: más simple, menos tokens, ideal para tareas enfocadas.',
       },
       multi: {
         name: 'Modo multi',
@@ -411,11 +409,11 @@ export const es = {
   },
 
   finalCta: {
-    headline: 'Dejá de configurar.\nEmpezá a enviar.',
+    headline: 'Deja de configurar.\nEmpieza a enviar.',
     subheadline:
-      'Una instalación. Todos los agentes configurados. Memoria persistente. Workflows estructurados. Todo lo que necesitás para enviar más rápido con IA.',
+      'Una instalación. Todos los agentes configurados. Memoria persistente. Workflows estructurados. Todo lo que necesitas para enviar más rápido con IA.',
     ctaInstall: 'Instala Gentle AI',
-    ctaGithub: 'Dale una estrella en GitHub',
+    ctaGithub: 'Deja una estrella en GitHub',
   },
 
   footer: {
@@ -448,4 +446,4 @@ export const es = {
       },
     },
   },
-} satisfies typeof en;
+} as const;

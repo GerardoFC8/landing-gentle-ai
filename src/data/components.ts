@@ -43,7 +43,7 @@ export const components: GentleComponent[] = [
     category: 'core',
     description: {
       en: 'Reusable agent instructions packaged as Skills. Includes go-testing, branch-pr, issue-creation, skill-creator, and more. Auto-loaded by context — the right skill activates when you need it.',
-      es: 'Instrucciones de agente reutilizables empaquetadas como Skills. Incluye go-testing, branch-pr, issue-creation, skill-creator y más. Se cargan automáticamente por contexto — la skill correcta se activa cuando la necesitás.',
+      es: 'Instrucciones de agente reutilizables empaquetadas como Skills. Incluye go-testing, branch-pr, issue-creation, skill-creator y más. Se cargan automáticamente por contexto — la skill correcta se activa cuando la necesitas.',
     },
   },
   {
@@ -54,7 +54,7 @@ export const components: GentleComponent[] = [
     category: 'enhancement',
     description: {
       en: 'MCP server integration that pulls up-to-date library documentation at query time. No more hallucinated APIs — your agent reads the actual docs before writing code.',
-      es: 'Integración con servidor MCP que trae documentación actualizada de librerías en tiempo de consulta. Sin APIs alucinadas — tu agente lee la documentación real antes de escribir código.',
+      es: 'Integración con servidor MCP que trae documentación actualizada de librerías en tiempo real. Sin APIs alucinadas: tu agente lee la documentación real antes de escribir código.',
     },
   },
   {
@@ -65,7 +65,7 @@ export const components: GentleComponent[] = [
     category: 'enhancement',
     description: {
       en: 'Configures your agent\'s personality, tone, language, and expertise level. Defines how your agent communicates — from Rioplatense Spanish to senior architect mindset.',
-      es: 'Configura la personalidad, el tono, el idioma y el nivel de expertise de tu agente. Define cómo se comunica — desde el español rioplatense hasta la mentalidad de arquitecto senior.',
+      es: 'Configura la personalidad, el tono, el idioma y el nivel de experiencia de tu agente. Define cómo se comunica: desde un español latinoamericano neutral hasta la mentalidad de arquitecto senior.',
     },
   },
   {
@@ -76,7 +76,7 @@ export const components: GentleComponent[] = [
     category: 'config',
     description: {
       en: 'Fine-grained permission rules for what your agent can read, write, execute, and ignore. Prevents accidental writes to sensitive files and keeps the agent in its lane.',
-      es: 'Reglas de permisos granulares para lo que tu agente puede leer, escribir, ejecutar e ignorar. Previene escrituras accidentales en archivos sensibles y mantiene al agente en su carril.',
+      es: 'Reglas de permisos granulares para lo que tu agente puede leer, escribir, ejecutar e ignorar. Evita escrituras accidentales en archivos sensibles y mantiene al agente dentro de límites claros.',
     },
   },
   {
@@ -87,7 +87,7 @@ export const components: GentleComponent[] = [
     category: 'enhancement',
     description: {
       en: 'Gentleman GitHub Agent integration. Adds issue-first enforcement, PR creation with structured templates, and branch management conventions to your agent\'s workflow.',
-      es: 'Integración con Gentleman GitHub Agent. Agrega el flujo issue-first, creación de PRs con templates estructurados y convenciones de manejo de branches al workflow de tu agente.',
+      es: 'Integración con Gentleman GitHub Agent. Agrega el flujo issue-first, creación de PRs con templates estructurados y convenciones de gestión de branches al workflow de tu agente.',
     },
   },
   {
