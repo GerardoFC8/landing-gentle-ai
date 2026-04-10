@@ -22,5 +22,4 @@ Thumbs.db
 
 # SDD artifacts (local only)
 .atl/
-docs_local/
 .vercel
