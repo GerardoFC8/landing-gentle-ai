@@ -76,7 +76,7 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
   --bg-elevated: #1a1a26;
   --border: #1e1e2e;
   --text-primary: #e4e4ef;
-  --text-muted: #6b6b8a;
+  --text-muted: #9090ab;
   --accent-primary: #E91E8C;
   --accent-tertiary: #a855f7;
   --accent-secondary: #22d3ee;
@@ -92,7 +92,7 @@ a, button, [role="button"], input[type="submit"], .cursor-pointer {
   --bg-elevated: #f0f0f5;
   --border: #dddde8;
   --text-primary: #0a0a1a;
-  --text-muted: #6b6b8a;
+  --text-muted: #5a5a75;
   --accent-primary: #d4177e;
   --accent-tertiary: #7c3aed;
   --accent-secondary: #0891b2;

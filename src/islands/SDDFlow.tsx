@@ -42,7 +42,7 @@ interface SDDFlowProps {
 
 export default function SDDFlow({ phases, locale }: SDDFlowProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(phases[0]?.id ?? null);
   const pillRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const selectedPhase = phases.find((p) => p.id === selectedId) ?? null;
@@ -97,28 +97,34 @@ export default function SDDFlow({ phases, locale }: SDDFlowProps) {
           const isSelected = phase.id === selectedId;
 
           return (
-            <button
-              key={phase.id}
-              ref={(el) => { pillRefs.current[index] = el; }}
-              role="tab"
-              aria-selected={isSelected}
-              aria-controls={`sdd-panel-${phase.id}`}
-              id={`sdd-tab-${phase.id}`}
-              tabIndex={isSelected || (!selectedId && index === 0) ? 0 : -1}
-              onClick={() => selectPhase(phase.id)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              className={[
-                'inline-flex items-center gap-2 px-4 py-2 rounded-full border font-mono text-sm',
-                'transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2',
-                'focus-visible:outline-[var(--accent-primary)]',
-                isSelected
-                  ? 'border-[var(--accent-primary)] text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 shadow-[0_0_12px_var(--accent-primary)]'
-                  : 'border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent-primary)]/50 hover:text-[var(--text-primary)]',
-              ].join(' ')}
-            >
-              <PhaseIcon id={phase.id} size={16} />
-              <span>{phase.label}</span>
-            </button>
+            <div key={phase.id} className="inline-flex items-center gap-2">
+              <button
+                ref={(el) => { pillRefs.current[index] = el; }}
+                role="tab"
+                aria-selected={isSelected}
+                aria-controls={`sdd-panel-${phase.id}`}
+                id={`sdd-tab-${phase.id}`}
+                tabIndex={isSelected || (!selectedId && index === 0) ? 0 : -1}
+                onClick={() => selectPhase(phase.id)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className={[
+                  'inline-flex items-center gap-2 px-4 py-2 rounded-full border font-mono text-sm',
+                  'transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2',
+                  'focus-visible:outline-[var(--accent-primary)]',
+                  isSelected
+                    ? 'border-[var(--accent-primary)] text-[var(--accent-primary)] bg-[var(--accent-primary)]/10 shadow-[0_0_12px_var(--accent-primary)]'
+                    : 'border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent-primary)]/50 hover:text-[var(--text-primary)]',
+                ].join(' ')}
+              >
+                <PhaseIcon id={phase.id} size={16} />
+                <span>{phase.label}</span>
+              </button>
+              {index < phases.length - 1 && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="opacity-40 shrink-0">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              )}
+            </div>
           );
         })}
       </div>
@@ -197,14 +203,6 @@ export default function SDDFlow({ phases, locale }: SDDFlowProps) {
         )}
       </AnimatePresence>
 
-      {/* Empty state — no phase selected */}
-      {!selectedPhase && (
-        <p className="text-center text-sm text-[var(--text-muted)] py-4" aria-live="polite">
-          {locale === 'es'
-            ? 'Seleccioná una fase para ver los detalles'
-            : 'Select a phase to see details'}
-        </p>
-      )}
     </div>
   );
 }
